@@ -39,14 +39,7 @@ initial begin
 
   $display();
 
-  //do_reset(reset);
-  repeat(3) begin
-    @(posedge c_clk);
-    reset = 1;
-	end
-  
-  @(posedge c_clk);
-  reset = 0;
+  do_reset(reset);
   
   //do stuff
   @(posedge c_clk);
@@ -127,16 +120,15 @@ end
 
 
 
-task do_reset(inout bit reset);	//reset the device
-
-  repeat(3) begin
-    @(posedge c_clk);
-    reset = 1;
-	end
-
+function do_reset;	//reset the device
+  begin
+    repeat(3) begin
+      @(posedge c_clk);
+      reset = 1;
+	  end
 	@(posedge c_clk) reset = 0;
-	
-endtask
+	end
+endfunction
 
 
 
