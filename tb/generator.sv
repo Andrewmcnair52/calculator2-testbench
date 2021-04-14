@@ -1,13 +1,9 @@
-`include "tb/transaction.sv"
+
 
 class Generator;  //class to generate transactions
 
-  transaction t;
-  transaction trans_queue[$]; //transaction list
-  
-  //how we give generator tests? declare in constructor?
-  //or maybe make it parse a huge list?
-  //have a function here called from calc2_tb and create transactions here?
+  Transaction t;
+  Transaction trans_queue[$]; //transaction list
   
   function new(); //generator constructor
     //a temporary test transaction
@@ -15,5 +11,13 @@ class Generator;  //class to generate transactions
     t.setExpected();
     trans_queue.push_back(t);
   endfunction
+  
+  function run(); //run transaction queue
+    foreach(trans_queue[i]) begin
+    
+    end
+  endfunction
+
+
 
 endclass
