@@ -39,9 +39,9 @@ module calc2_tb;
 initial begin
   
   Generator gen;
-  gen = new();
-  
   transaction t;
+  
+  gen = new();
   t = gen.trans_queue.pop_back();
 
   $display();
