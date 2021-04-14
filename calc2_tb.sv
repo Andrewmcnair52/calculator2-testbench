@@ -48,7 +48,13 @@ initial begin
   req1_tag_in   <= 2'h01;
   
   @(posedge c_clk);
-  req1_data_in  = 32'h20;
+  req1_data_in  <= 32'h20;
+  
+  @(negedge c_clk);
+  req1_cmd_in   <= 4'h0;    //clear
+  req1_data_in  <= 32'h0;
+  req1_tag_in   <= 2'h0;
+  
   
   for(int i=0; i<10; i++) begin		//give it 10 cycles to respond
 		@(posedge c_clk);
