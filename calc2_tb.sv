@@ -39,7 +39,7 @@ initial begin
 
   $display();
 
-  do_reset(reset);
+  do_reset();
   
   //do stuff
   @(posedge c_clk);
