@@ -120,15 +120,15 @@ end
 
 
 
-function do_reset;	//reset the device
+task do_reset;	//reset the device
   begin
     repeat(3) begin
       @(posedge c_clk);
       reset = 1;
 	  end
-	@(posedge c_clk) reset = 0;
+	  @(posedge c_clk) reset = 0;
 	end
-endfunction
+endtask
 
 
 
