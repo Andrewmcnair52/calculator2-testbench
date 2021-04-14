@@ -1,7 +1,7 @@
 
 class Generator;
 
-  trans_queue[$];
+  transaction trans_queue[$];
   
   function new();
   
