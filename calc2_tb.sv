@@ -80,6 +80,8 @@ initial begin
 			  i = 10;
 		  end
 	  end
+	  
+	  $finish
 
 end
 
