@@ -35,7 +35,7 @@ class transaction;
         //do nothing, expected values default to 0 which is expected for this case
       end else if(cmd_in[i]==4'b0001) begin           //addition
         data_expected[i] = param1[i] + param2[i];
-        result = t.param1 + t.param2;
+        result = param1[i] + param2[i];
         if(result>max) begin
           resp_expected[i] = 2'b10;
         end else begin
