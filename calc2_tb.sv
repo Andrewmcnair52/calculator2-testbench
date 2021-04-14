@@ -128,7 +128,7 @@ task do_reset(inout bit reset);	//reset the device
 
 	for (int i=0;i<3;i++) begin	//Hold reset to '1111111'b for seven cycles
 		@(posedge c_clk);
-		reset[6:0] = 1'b1;
+		reset = 1'b1;
 	end
 
 	@(posedge c_clk) reset = 1'b0;
