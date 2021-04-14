@@ -2,8 +2,8 @@
 class transaction;
 
   bit[31:0] param1[4], param2[4], data_out[4], data_expected[4];
-  bit[3:0] cmd_in[4], resp_expected[4], resp_out[4];
-  bit[1:0] tag[4];
+  bit[3:0] cmd_in[4];
+  bit[1:0] tag[4], resp_expected[4], resp_out[4];
   int clock_cycles;
   
   function new( input bit[31:0] p11=32'h0, p12=32'h0, p13=32'h0, p14=32'h0, input bit[31:0] p21=32'h0, p22=32'h0, p23=32'h0, p24=32'h0, input bit[3:0] c1=4'h0, c2=4'h0, c3=4'h0, c4=4'h0, input bit[1:0] t1=2'h0, t2=2'h0, t3=2'h0, t4=2'h0, input int cc=10 );
