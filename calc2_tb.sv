@@ -81,7 +81,7 @@ initial begin
 		  end
 	  end
 	  
-	  $finish
+	  $finish;
 
 end
 
