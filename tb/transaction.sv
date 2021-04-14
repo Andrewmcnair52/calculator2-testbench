@@ -2,7 +2,7 @@
 class transaction;
 
   bit[31:0] param1[4], param2[4], data_out[4], data_expected[4];
-  bit[3:0] cmd_in[4], resp_out[4];
+  bit[3:0] cmd_in[4], resp_expected[4], resp_out[4];
   bit[1:0] tag[4];
   int clock_cycles;
   
@@ -19,8 +19,46 @@ class transaction;
     $display("param2: %h, %h, %h, %h", param2[0],param2[1],param2[2],param2[3]);
     $display("cmd: %h, %h, %h, %h", cmd_in[0],cmd_in[1],cmd_in[2],cmd_in[3]);
     $display("tag: %h, %h, %h, %h", tag[0],tag[1],tag[2],tag[3]);
+    $display("data_expec: %h, %h, %h, %h", data_expected[0],data_expected[1],data_expected[2],data_expected[3]);
+    $display("resp_expec: %h, %h, %h, %h", resp_expected[0],resp_expected[1],resp_expected[2],resp_expected[3]);
     $display("clock cycles: %0d", clock_cycles);
     $display();
+  endfunction
+  
+  function setExpected;
+  
+    longint result, max = 64'h00000000FFFFFFFF;  //variables for overflow detection
+  
+    for(int i=0; i<4; i++) begin  //foreach channel
+      
+      if(cmd_in[i]==4'b0000) begin                    //no command
+        //do nothing, expected values default to 0 which is expected for this case
+      end else if(cmd_in[i]==4'b0001) begin           //addition
+        data_expected[i] = param1[i] + param2[i];
+        result = t.param1 + t.param2;
+        if(result>max) begin
+          resp_expected[i] = 2'b10;
+        end else begin
+          resp_expected[i] = 2'b01;
+        end
+      end else if(cmd_in[i]==4'b0010) begin           //subtraction
+        data_expected[i] = param1[i] - param2[i];
+        if(param1[i]<param2[i]) begin
+          resp_expected[i] = 2'b10;
+        end else begin
+          resp_expected[i] = 2'b01;
+        end
+      end else if(cmd_in[i]==4'b0101) begin           //shift left
+        data_expected[i] = param1[i] << param2[i];
+        resp_expected = 2'b01;
+      end else if(cmd_in[i]==4'b0110) begin           //shift right
+        data_expected[i] = param1[i] >> param2[i];
+        resp_expected = 2'b01;
+      end else begin                                  //invalid command
+        resp_expected = 2'b10;
+      end
+      
+    end    //end for loop
   endfunction
 
 endclass
