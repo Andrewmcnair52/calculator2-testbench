@@ -1,7 +1,6 @@
 
 
 module calc2_tb;
-
 	
   bit 			  c_clk;
 	bit     		reset;
@@ -58,30 +57,31 @@ initial begin
 
   //do stuff
   @(posedge c_clk);
-  req1_cmd_in   = 4'h1;    //add
-  req1_data_in  = 32'h30;
+  req1_cmd_in   <= 4'b0001;    //add
+  req1_data_in  <= 32'h30;
+  req1_tag_in   <= 2'h01;
   
   @(posedge c_clk);
-  req1_data_in  = 32'h20;
+  req1_data_in  <= 32'h20;
   
   for(int i=0; i<10; i++) begin		//give it 10 cycles to respond
-		  @(posedge c_clk);
-		  if(i == 9) begin
-		  	$display("no response");
-		  	$display("out_resp1: %h", out_resp1);
-		    $display("out_data1: %h", out_data1);
-		    $display("out_tag1: %h", out_tag1);
-		  end
-		  else if (out_resp1 != 0) begin
-		    $display("response after %0d cycles", i+1);
-		    $display("out_resp1: %h", out_resp1);
-		    $display("out_data1: %h", out_data1);
-		    $display("out_tag1: %h", out_tag1);
-			  i = 10;
-		  end
-	  end
+		@(posedge c_clk);
+		if(i == 9) begin
+			$display("no response");
+		  $display("out_resp1: %h", out_resp1);
+		  $display("out_data1: %h", out_data1);
+		  $display("out_tag1: %h", out_tag1);
+		end
+		else if (out_resp1 != 0) begin
+		  $display("response after %0d cycles", i+1);
+		  $display("out_resp1: %h", out_resp1);
+		  $display("out_data1: %h", out_data1);
+		  $display("out_tag1: %h", out_tag1);
+			i = 10;
+		end
+	end
 	  
-	  $finish;
+	$finish;
 
 end
 
@@ -119,6 +119,13 @@ calc2_top calc2_top(
 initial begin
 	forever
       #50ns c_clk=!c_clk;
+      if(c_clk==0) begin
+        $display("time: %t            reset: %h", $time, reset);
+        $display("req1_cmd_in: %h     out_resp1: %h", req1_cmd_in, out_resp1);
+		    $display("req1_data_in: %h    out_data1: %h", req1_data_in, out_data1);
+		    $display("req1_tag_in: %h     out_tag1: %h", req1_tag_in, out_tag1);
+		    $display()
+      end
 end
 
 
@@ -128,10 +135,10 @@ task do_reset(inout bit reset);	//reset the device
 
 	for (int i=0;i<3;i++) begin	//Hold reset to '1111111'b for seven cycles
 		@(posedge c_clk);
-		reset = 1'b1;
+		reset <= 1;
 	end
 
-	@(posedge c_clk) reset = 1'b0;
+	@(posedge c_clk) reset <= 0;
 	
 endtask
 
