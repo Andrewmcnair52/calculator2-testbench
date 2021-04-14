@@ -2,8 +2,8 @@
 
 module calc2_tb;
 	
-  bit 			  c_clk;
-	bit     		reset;
+  bit 			  c_clk = 0;
+	bit     		reset = 0;
 	
 	bit [3:0] 		req1_cmd_in   = 4'h0;
 	bit [31:0] 		req1_data_in  = 32'h0;
@@ -39,7 +39,6 @@ initial begin
 
   $display();
 
-  @(posedge c_clk);
   do_reset(reset);
   
   //do stuff
@@ -126,14 +125,9 @@ task do_reset(inout bit reset);	//reset the device
   repeat(3) begin
     @(posedge c_clk);
     reset = 1;
-    $display("%t: reset high value = %b", $time, reset);
-	  $display();
 	end
 
-	@(posedge c_clk) 
-	reset = 0;
-	$display("%t: reset low value = %b", $time, reset);
-	$display();
+	@(posedge c_clk) reset = 0;
 	
 endtask
 
