@@ -1,6 +1,5 @@
 
 
-
 module calc2_tb;
 
 	
@@ -33,10 +32,53 @@ module calc2_tb;
 	bit [31:0]	out_data4;
 	bit [1:0]   out_tag4;
 
+  //command inputs:
+  //Add: 4'h1   Sub: 4'h2
+  //SHL: 4'h5   SHR: 4'h6
 
 initial begin
 
+  //all inputs must be driven low from beginning of simulation
+  req1_cmd_in   = 4'h0;
+	req1_data_in  = 32'h0; 
+	req1_tag_in 	= 2'h0;
+	req2_cmd_in   = 4'h0;
+	req2_data_in  = 32'h0;
+	req2_tag_in	  = 2'h0;
+	req3_cmd_in   = 4'h0;
+	req3_data_in  = 32'h0;
+	breq3_tag_in	= 2'h0;
+	req4_cmd_in   = 4'h0;
+	breq4_data_in = 32'h0;
+	req4_tag_in   = 2'h0;
+
+  do_reset(reset);
+
   //do stuff
+  @(posedge c_clk);
+  req1_cmd_in   = 4'h1    //add
+  req1_data_in  = 32'h30
+  
+  @(posedge c_clk);
+  req1_data_in  = 32'h20
+  
+  for(int i=0; i<10; i++) begin		//give it 10 cycles to respond
+		  @(posedge c_clk);
+		  if(i == 9) begin
+		  	t.actual_resp = out_resp1;
+	  		t.actual_data = out_data1;
+	  		if(debug==1) begin
+	  			$display("no response");
+	  		end
+		  end
+		  else if (out_resp1 != 0) begin
+		    $display("response after %0d cycles", i+1);
+		    $display("out_resp1: %h", out_resp1);
+		    $display("out_data1: %h", out_data1);
+		    $display("out_tag1: %h", out_tag1);
+			  i = 10;
+		  end
+	  end
 
 end
 
@@ -76,4 +118,26 @@ initial begin
       #50ns c_clk=!c_clk;
 end
 
+
+
+
+task do_reset(inout bit [7:0] reset);	//reset the device
+
+	for (int i=0;i<3;i++) begin	//Hold reset to '1111111'b for seven cycles
+		@(posedge c_clk);
+		reset[6:0] = 7'b1111111;
+	end
+
+	@(posedge c_clk) reset = 7'b0000000;
+	
+endtask
+
+
+
+
 endmodule
+
+
+
+
+
