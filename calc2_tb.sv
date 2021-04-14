@@ -5,18 +5,18 @@ module calc2_tb;
   bit 			  c_clk;
 	bit     		reset;
 	
-	bit [3:0] 		req1_cmd_in;
-	bit [31:0] 		req1_data_in;
-	bit [1:0]     req1_tag_in;	
-	bit [3:0] 		req2_cmd_in;
-	bit [31:0] 		req2_data_in;
-	bit [1:0]     req2_tag_in;	
-	bit [3:0] 		req3_cmd_in;
-	bit [31:0] 		req3_data_in;
-	bit [1:0]     req3_tag_in;	
-	bit [3:0] 		req4_cmd_in;
-	bit [31:0] 		req4_data_in;
-	bit [1:0]     req4_tag_in;	
+	bit [3:0] 		req1_cmd_in   = 4'h0;
+	bit [31:0] 		req1_data_in  = 32'h0;
+	bit [1:0]     req1_tag_in 	= 2'h0;
+	bit [3:0] 		req2_cmd_in   = 4'h0;
+	bit [31:0] 		req2_data_in  = 32'h0;
+	bit [1:0]     req2_tag_in	  = 2'h0;
+	bit [3:0] 		req3_cmd_in   = 4'h0;
+	bit [31:0] 		req3_data_in  = 32'h0;
+	bit [1:0]     req3_tag_in	  = 2'h0;
+	bit [3:0] 		req4_cmd_in   = 4'h0;
+	bit [31:0] 		req4_data_in  = 32'h0;
+	bit [1:0]     req4_tag_in   = 2'h0;
 
 	bit [1:0]		out_resp1;
 	bit [31:0]	out_data1;
@@ -38,20 +38,6 @@ module calc2_tb;
 initial begin
 
   $display();
-
-  //all inputs must be driven low from beginning of simulation
-  req1_cmd_in   = 4'h0;
-	req1_data_in  = 32'h0; 
-	req1_tag_in 	= 2'h0;
-	req2_cmd_in   = 4'h0;
-	req2_data_in  = 32'h0;
-	req2_tag_in	  = 2'h0;
-	req3_cmd_in   = 4'h0;
-	req3_data_in  = 32'h0;
-	req3_tag_in	= 2'h0;
-	req4_cmd_in   = 4'h0;
-	req4_data_in = 32'h0;
-	req4_tag_in   = 2'h0;
 
   @(posedge c_clk);
   do_reset(reset);
@@ -126,10 +112,10 @@ end
 //debug info
 
   always @(negedge c_clk) begin
-      $display("time: %t            reset: %h", $time, reset);
-      $display("req1_cmd_in:  %h            out_resp1: %h", req1_cmd_in, out_resp1);
+      $display("reset: %b   time: %t", $time, reset);
+      $display("req1_cmd_in:  %h           out_resp1: %h", req1_cmd_in, out_resp1);
 		  $display("req1_data_in: %h    out_data1: %h", req1_data_in, out_data1);
-		  $display("req1_tag_in:  %h            out_tag1: %h", req1_tag_in, out_tag1);
+		  $display("req1_tag_in:  %h           out_tag1:  %h", req1_tag_in, out_tag1);
 		  $display();
   end
 
