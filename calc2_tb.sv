@@ -38,50 +38,19 @@ module calc2_tb;
 
 initial begin
   
+  Generator gen;
+  gen = new();
+  
   transaction t;
-  t = new( .p11(32'h10), .p21(11), .c1(4'h1), .t1(2'h2) );
-  t.setExpected();
+  t = gen.trans_queue.pop_back();
 
   $display();
   t.print();
-
-/*
-  do_reset();
   
   //do stuff
-  @(posedge c_clk);
-  req1_cmd_in   <= 4'b0001;    //add
-  req1_data_in  <= 32'h30;
-  req1_tag_in   <= 2'h01;
   
-  @(posedge c_clk);
-  req1_data_in  <= 32'h20;
-  
-  @(negedge c_clk);
-  req1_cmd_in   <= 4'h0;    //clear
-  req1_data_in  <= 32'h0;
-  req1_tag_in   <= 2'h0;
-  
-  
-  for(int i=0; i<10; i++) begin		//give it 10 cycles to respond
-		@(posedge c_clk);
-		if(i == 9) begin
-			$display("no response");
-		  $display("out_resp1: %h", out_resp1);
-		  $display("out_data1: %h", out_data1);
-		  $display("out_tag1: %h", out_tag1);
-		end
-		else if (out_resp1 != 0) begin
-		  $display("response after %0d cycles", i+1);
-		  $display("out_resp1: %h", out_resp1);
-		  $display("out_data1: %h", out_data1);
-		  $display("out_tag1: %h", out_tag1);
-			i = 10;
-		end
-	end
 	
 	$display();
-	*/
 	$finish;
 
 end
@@ -132,20 +101,6 @@ end
 		  $display();
   end
 */
-
-
-task do_reset;	//reset the device
-  begin
-    repeat(3) begin
-      @(posedge c_clk);
-      reset = 1;
-	  end
-	  @(posedge c_clk) reset = 0;
-	end
-endtask
-
-
-
 
 endmodule
 
