@@ -123,15 +123,17 @@ end
 
 task do_reset(inout bit reset);	//reset the device
 
-	for (int i=0;i<3;i++) begin	//Hold reset to '1111111'b for seven cycles
-		@(posedge c_clk);
-		reset <= 1;
-		$display("reset value = %h",reset);
-		$display();
+  reset = 1'b1;
+  repeat(3) begin
+    @(posedge c_clk);
+    $display("reset value = %b",reset);
+	  $display();
 	end
 
 	@(posedge c_clk) 
 	reset <= 0;
+	$display("reset value = %b",reset);
+	$display();
 	
 endtask
 
