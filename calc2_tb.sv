@@ -40,9 +40,9 @@ initial begin
 
   $display();
   
-  transaction myTr; 
-  myTr = new( .p11(32'h10), .c1(4'h1), .t1(2'h2) );
-  myTr.print();
+  transaction t;
+  t = new( .p11(32'h10), .c1(4'h1), .t1(2'h2) );
+  t.print();
 
 /*
   do_reset();
