@@ -4,7 +4,7 @@ module calc2_tb;
 
 	
   bit 			  c_clk;
-	bit [6:0]		reset;
+	bit     		reset;
 	
 	bit [3:0] 		req1_cmd_in;
 	bit [31:0] 		req1_data_in;
@@ -53,6 +53,8 @@ initial begin
 	req4_tag_in   = 2'h0;
 
   do_reset(reset);
+  
+  $display();
 
   //do stuff
   @(posedge c_clk);
@@ -120,14 +122,14 @@ end
 
 
 
-task do_reset(inout bit [7:0] reset);	//reset the device
+task do_reset(inout bit reset);	//reset the device
 
 	for (int i=0;i<3;i++) begin	//Hold reset to '1111111'b for seven cycles
 		@(posedge c_clk);
-		reset[6:0] = 7'b1111111;
+		reset[6:0] = 1'b1;
 	end
 
-	@(posedge c_clk) reset = 7'b0000000;
+	@(posedge c_clk) reset = 1'b0;
 	
 endtask
 
