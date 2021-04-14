@@ -120,16 +120,18 @@ calc2_top calc2_top(
 initial begin
 	forever
       #50ns c_clk=!c_clk;
-      if(c_clk==0) begin
-        $display("time: %t            reset: %h", $time, reset);
-        $display("req1_cmd_in: %h     out_resp1: %h", req1_cmd_in, out_resp1);
-		    $display("req1_data_in: %h    out_data1: %h", req1_data_in, out_data1);
-		    $display("req1_tag_in: %h     out_tag1: %h", req1_tag_in, out_tag1);
-		    $display();
-      end
 end
 
-
+//debug info
+initial begin
+  forever
+    @(negedge c_clk)
+    $display("time: %t            reset: %h", $time, reset);
+    $display("req1_cmd_in: %h     out_resp1: %h", req1_cmd_in, out_resp1);
+		$display("req1_data_in: %h    out_data1: %h", req1_data_in, out_data1);
+		$display("req1_tag_in: %h     out_tag1: %h", req1_tag_in, out_tag1);
+		$display();
+end
 
 
 task do_reset(inout bit reset);	//reset the device
