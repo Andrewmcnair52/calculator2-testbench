@@ -126,10 +126,10 @@ end
 initial begin
   forever
     @(negedge c_clk)
-    $display("time: %t            reset: %h", $time, reset);
     $display("req1_cmd_in: %h     out_resp1: %h", req1_cmd_in, out_resp1);
 		$display("req1_data_in: %h    out_data1: %h", req1_data_in, out_data1);
 		$display("req1_tag_in: %h     out_tag1: %h", req1_tag_in, out_tag1);
+		$display("time: %t            reset: %h", $time, reset);
 		$display();
 end
 
@@ -138,10 +138,11 @@ task do_reset(inout bit reset);	//reset the device
 
 	for (int i=0;i<3;i++) begin	//Hold reset to '1111111'b for seven cycles
 		@(posedge c_clk);
-		reset <= 1;
+		reset = 1;
 	end
 
-	@(posedge c_clk) reset <= 0;
+	@(posedge c_clk) 
+	reset = 0;
 	
 endtask
 
