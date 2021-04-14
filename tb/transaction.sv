@@ -14,15 +14,13 @@ class transaction;
       clock_cycles = cc;
   endfunction
   
-  function print;
-    begin
+  function print();
     $display("param1: %h, %h, %h, %h", param1[0],param1[1],param1[2],param1[3]);
     $display("param2: %h, %h, %h, %h", param2[0],param2[1],param2[2],param2[3]);
     $display("cmd: %h, %h, %h, %h", cmd_in[0],cmd_in[1],cmd_in[2],cmd_in[3]);
     $display("tag: %h, %h, %h, %h", tag[0],tag[1],tag[2],tag[3]);
     $display("clock cycles: %0d", clock_cycles);
     $display();
-    end
   endfunction
 
 endclass

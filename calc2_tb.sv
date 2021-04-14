@@ -41,7 +41,7 @@ initial begin
   $display();
   
   transaction t;
-  t = new( .p11(32'h10), .c1(4'h1), .t1(2'h2) );
+  t = new();
   t.print();
 
 /*
