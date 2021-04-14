@@ -57,12 +57,12 @@ initial begin
 
   //do stuff
   @(posedge c_clk);
-  req1_cmd_in   <= 4'b0001;    //add
-  req1_data_in  <= 32'h30;
-  req1_tag_in   <= 2'h01;
+  req1_cmd_in   = 4'b0001;    //add
+  req1_data_in  = 32'h30;
+  req1_tag_in   = 2'h01;
   
   @(posedge c_clk);
-  req1_data_in  <= 32'h20;
+  req1_data_in  = 32'h20;
   
   for(int i=0; i<10; i++) begin		//give it 10 cycles to respond
 		@(posedge c_clk);
