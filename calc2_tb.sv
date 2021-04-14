@@ -44,9 +44,9 @@ initial begin
   
   //do stuff
   @(posedge c_clk);
-  req1_cmd_in   = 4'b0001;    //add
-  req1_data_in  = 32'h30;
-  req1_tag_in   = 2'h01;
+  req1_cmd_in   <= 4'b0001;    //add
+  req1_data_in  <= 32'h30;
+  req1_tag_in   <= 2'h01;
   
   @(posedge c_clk);
   req1_data_in  = 32'h20;
@@ -123,7 +123,7 @@ end
 
 task do_reset(inout bit reset);	//reset the device
 
-  reset = 1'b1;
+  reset <= 1;
   repeat(3) begin
     @(posedge c_clk);
     $display("%t: reset high value = %b", $time, reset);
@@ -131,7 +131,7 @@ task do_reset(inout bit reset);	//reset the device
 	end
 
 	@(posedge c_clk) 
-	reset = 1'b0;
+	reset <= 0;
 	$display("%t: reset low value = %b", $time, reset);
 	$display();
 	
