@@ -39,7 +39,7 @@ module calc2_tb;
 initial begin
   
   transaction t;
-  t = new( .p11(32'h10), .p21(11) .c1(4'h1), .t1(2'h2) );
+  t = new( .p11(32'h10), .p21(11), .c1(4'h1), .t1(2'h2) );
   t.setExpected();
 
   $display();
