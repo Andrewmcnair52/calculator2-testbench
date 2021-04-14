@@ -46,7 +46,7 @@ initial begin
 	end
   
   @(posedge c_clk);
-  reset <= 0;
+  reset = 0;
   
   //do stuff
   @(posedge c_clk);
