@@ -37,6 +37,8 @@ module calc2_tb;
 
 initial begin
 
+  $display();
+
   //all inputs must be driven low from beginning of simulation
   req1_cmd_in   = 4'h0;
 	req1_data_in  = 32'h0; 
@@ -51,10 +53,9 @@ initial begin
 	req4_data_in = 32'h0;
 	req4_tag_in   = 2'h0;
 
+  @(posedge c_clk);
   do_reset(reset);
   
-  $display();
-
   //do stuff
   @(posedge c_clk);
   req1_cmd_in   = 4'b0001;    //add
@@ -125,10 +126,10 @@ end
 //debug info
 
   always @(negedge c_clk) begin
+      $display("time: %t            reset: %h", $time, reset);
       $display("req1_cmd_in: %h     out_resp1: %h", req1_cmd_in, out_resp1);
 		  $display("req1_data_in: %h    out_data1: %h", req1_data_in, out_data1);
 		  $display("req1_tag_in: %h     out_tag1: %h", req1_tag_in, out_tag1);
-		  $display("time: %t            reset: %h", $time, reset);
 		  $display();
   end
 
