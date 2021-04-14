@@ -1,5 +1,6 @@
 `include "tb/transaction.sv"
 `include "tb/generator.sv"
+`include "tb/driver.sv"
 
 module calc2_tb;
 	
@@ -38,19 +39,21 @@ module calc2_tb;
 
 initial begin
   
+  //edclare things before statments, or it errors
   Generator gen;
-  transaction t;
+  Transaction t;
+  Driver d;
   
-  gen = new();
-  t = gen.trans_queue.pop_back();
-
-  $display();
-  t.print();
+  $display(); //output seperator
   
-  //do stuff
-  
+  //a test case
+  gen = new();                      //creates transaction in constructor
+  t = gen.trans_queue.pop_back();   //retrieve transaction from generator
+  d = new();                        //construct the driver
+  d.run_single(t);                  //run the transaction       
+  t.print();                        //print results saved in transaction
 	
-	$display();
+	$display(); //output seperator
 	$finish;
 
 end
