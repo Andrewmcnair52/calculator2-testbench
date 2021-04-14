@@ -37,11 +37,11 @@ module calc2_tb;
   //SHL: 4'h5   SHR: 4'h6
 
 initial begin
-
-  $display();
   
   transaction t;
-  t = new();
+  t = new( .p11(32'h10), .c1(4'h1), .t1(2'h2) );
+
+  $display();
   t.print();
 
 /*
