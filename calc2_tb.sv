@@ -81,7 +81,7 @@ initial begin
 
 end
 
-calc1_top calc1_top(
+calc2_top calc2_top(
 	.c_clk(c_clk),
 	.reset(reset),
 	.req1_cmd_in(req1_cmd_in),
