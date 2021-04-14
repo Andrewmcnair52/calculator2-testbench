@@ -1,4 +1,5 @@
-
+`include "tb/transaction.sv"
+`include "tb/generator.sv"
 
 module calc2_tb;
 	
@@ -38,7 +39,11 @@ module calc2_tb;
 initial begin
 
   $display();
+  
+  transaction myTr = new( .d1(32'h10), .c1(4'h1), .t1(2'h2));
+  myTr.print();
 
+/*
   do_reset();
   
   //do stuff
@@ -74,6 +79,7 @@ initial begin
 	end
 	
 	$display();
+	*/
 	$finish;
 
 end
@@ -115,7 +121,7 @@ initial begin
 end
 
 //debug info
-
+/*
   always @(negedge c_clk) begin
       $display("reset: %b   time: %t", reset, $time);
       $display("req1_cmd_in:  %h           out_resp1: %h", req1_cmd_in, out_resp1);
@@ -123,7 +129,7 @@ end
 		  $display("req1_tag_in:  %h           out_tag1:  %h", req1_tag_in, out_tag1);
 		  $display();
   end
-
+*/
 
 
 task do_reset;	//reset the device
