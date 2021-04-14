@@ -123,7 +123,7 @@ initial begin
 end
 
 //debug info
-initial begin
+
   always @(negedge c_clk) begin
       $display("req1_cmd_in: %h     out_resp1: %h", req1_cmd_in, out_resp1);
 		  $display("req1_data_in: %h    out_data1: %h", req1_data_in, out_data1);
@@ -131,7 +131,7 @@ initial begin
 		  $display("time: %t            reset: %h", $time, reset);
 		  $display();
   end
-end
+
 
 
 task do_reset(inout bit reset);	//reset the device
