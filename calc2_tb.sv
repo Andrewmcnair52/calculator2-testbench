@@ -40,14 +40,10 @@ initial begin
   $display();
 
   //do_reset(reset);
-  @(posedge c_clk);
-  reset <= 1;
-  
-  @(posedge c_clk);
-  reset <= 1;
-  
-  @(posedge c_clk);
-  reset <= 1;
+  repeat(3) begin
+    @(posedge c_clk);
+    reset = 1;
+	end
   
   @(posedge c_clk);
   reset <= 0;
