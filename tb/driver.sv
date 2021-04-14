@@ -1,7 +1,7 @@
 
 class Driver; //runs code on DUT by manipulating inputs
 
-  task automatic run_single(transaction t);  //run a single transaction
+  task automatic run_single(Transaction t);  //run a single transaction
   
     do_reset();
     @(posedge c_clk);           //load in command, param1, and tag
