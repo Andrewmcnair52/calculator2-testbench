@@ -125,7 +125,7 @@ end
 //debug info
 initial begin
   forever
-    @(negedge c_clk)
+    @(negedge c_clk);
     $display("req1_cmd_in: %h     out_resp1: %h", req1_cmd_in, out_resp1);
 		$display("req1_data_in: %h    out_data1: %h", req1_data_in, out_data1);
 		$display("req1_tag_in: %h     out_tag1: %h", req1_tag_in, out_tag1);
