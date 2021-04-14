@@ -47,29 +47,28 @@ initial begin
 	req2_tag_in	  = 2'h0;
 	req3_cmd_in   = 4'h0;
 	req3_data_in  = 32'h0;
-	breq3_tag_in	= 2'h0;
+	req3_tag_in	= 2'h0;
 	req4_cmd_in   = 4'h0;
-	breq4_data_in = 32'h0;
+	req4_data_in = 32'h0;
 	req4_tag_in   = 2'h0;
 
   do_reset(reset);
 
   //do stuff
   @(posedge c_clk);
-  req1_cmd_in   = 4'h1    //add
-  req1_data_in  = 32'h30
+  req1_cmd_in   = 4'h1;    //add
+  req1_data_in  = 32'h30;
   
   @(posedge c_clk);
-  req1_data_in  = 32'h20
+  req1_data_in  = 32'h20;
   
   for(int i=0; i<10; i++) begin		//give it 10 cycles to respond
 		  @(posedge c_clk);
 		  if(i == 9) begin
-		  	t.actual_resp = out_resp1;
-	  		t.actual_data = out_data1;
-	  		if(debug==1) begin
-	  			$display("no response");
-	  		end
+		  	$display("no response");
+		  	$display("out_resp1: %h", out_resp1);
+		    $display("out_data1: %h", out_data1);
+		    $display("out_tag1: %h", out_tag1);
 		  end
 		  else if (out_resp1 != 0) begin
 		    $display("response after %0d cycles", i+1);
