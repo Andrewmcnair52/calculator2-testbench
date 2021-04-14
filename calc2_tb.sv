@@ -126,13 +126,13 @@ task do_reset(inout bit reset);	//reset the device
   reset = 1'b1;
   repeat(3) begin
     @(posedge c_clk);
-    $display("reset value = %b",reset);
+    $display("%t: reset high value = %b", $time, reset);
 	  $display();
 	end
 
 	@(posedge c_clk) 
-	reset <= 0;
-	$display("reset value = %b",reset);
+	reset = 1'b0;
+	$display("%t: reset low value = %b", $time, reset);
 	$display();
 	
 endtask
