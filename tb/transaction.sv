@@ -50,12 +50,12 @@ class transaction;
         end
       end else if(cmd_in[i]==4'b0101) begin           //shift left
         data_expected[i] = param1[i] << param2[i];
-        resp_expected = 2'b01;
+        resp_expected[i] = 2'b01;
       end else if(cmd_in[i]==4'b0110) begin           //shift right
         data_expected[i] = param1[i] >> param2[i];
-        resp_expected = 2'b01;
+        resp_expected[i] = 2'b01;
       end else begin                                  //invalid command
-        resp_expected = 2'b10;
+        resp_expected[i] = 2'b10;
       end
       
     end    //end for loop
