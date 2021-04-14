@@ -1,5 +1,5 @@
 
-class transaction
+class transaction;
 
   bit[31:0] param1[4], param2[4], data_out[4], data_expected[4];
   bit[3:0] cmd_in[4], resp_out[4];
