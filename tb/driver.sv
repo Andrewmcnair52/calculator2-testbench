@@ -4,7 +4,7 @@ class Driver; //runs code on DUT by manipulating inputs
 
   virtual calc_if calc;   //virtual interface to amke our interface available in the class
   
-  function new(virtual cal_if calc); //get the interface from test
+  function new(virtual calc_if calc); //get the interface from test
     this.calc = calc;                //connect virtual interface to our interface
   endfunction
 
