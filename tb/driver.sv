@@ -1,6 +1,12 @@
 
 class Driver; //runs code on DUT by manipulating inputs
 
+  calc_if calc
+  
+  function new(calc_if i);
+    calc = i;
+  endfunction
+
   task automatic run_single(Transaction t);  //run a single transaction
   
     do_reset();

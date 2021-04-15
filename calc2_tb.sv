@@ -27,7 +27,7 @@ initial begin
   //a test case
   gen = new();                      //creates transaction in constructor
   t = gen.trans_queue.pop_back();   //retrieve transaction from generator
-  d = new();                        //construct the driver
+  d = new(calc);                        //construct the driver
   d.run_single(t);                  //run the transaction       
   t.print();                        //print results saved in transaction
 	
