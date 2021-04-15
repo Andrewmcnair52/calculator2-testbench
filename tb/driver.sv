@@ -39,7 +39,7 @@ class Driver; //runs code on DUT by manipulating inputs
     calc_if.req4_tag_in   <= 2'h0;
   
     for(int i=0; i<t.clock_cycles; i++) begin		//give it specified number of clock cycles to respond
-	  	@(posedge c_clk);
+	  	@(posedge calc_if.c_clk);
 	  	if (calc_if.out_tag1 == t.tag[0]) begin   //channel 1
 	  	  $display("channel 1 response after %0d cycles", i+1);
 	  	  t.data_out[0] = calc_if.out_data1;
