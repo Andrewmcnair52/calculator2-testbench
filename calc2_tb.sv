@@ -30,7 +30,7 @@ initial begin
   
   //sample add transaction to generator and run
   gen.add( .p11(32'h22), .p21(32'h3), .c1(4'h2), .t1(2'h2) );  //22-3 on tag2 
-  gen.run(d);     //run transactions with driver
+  gen.run_queue(d);     //run transactions with driver
 	
 	$display(); //output seperator
 	$finish;
