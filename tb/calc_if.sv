@@ -2,7 +2,7 @@
 `ifndef CALC_IF_DEFINE
 `define CALC_IF_DEFINE
 
-Interface calc_if (input bit c_clk);
+interface calc_if(input bit c_clk);
 
   logic     		reset = 0;
 	
@@ -32,6 +32,6 @@ Interface calc_if (input bit c_clk);
 	logic [31:0]	out_data4;
 	logic [1:0]   out_tag4;
 
-Endinterface: calc_if 
+endinterface: calc_if 
 
 `endif
