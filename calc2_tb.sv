@@ -9,7 +9,7 @@ module calc2_tb;
   bit c_clk = 0;
   
   //define calculator interface
-  //calc_if(c_clk);
+  calc_if calc(c_clk);
 
   //command inputs:
   //Add: 4'h1   Sub: 4'h2
@@ -27,7 +27,7 @@ initial begin
   //a test case
   gen = new();                      //creates transaction in constructor
   t = gen.trans_queue.pop_back();   //retrieve transaction from generator
-  d = new();                        //construct the driver
+  d = new(calc);                        //construct the driver
   d.run_single(t);                  //run the transaction       
   t.print();                        //print results saved in transaction
 	
@@ -37,32 +37,32 @@ initial begin
 end
 
 calc2_top calc2_top(
-	.c_clk(calc_if.c_clk),
-	.reset(calc_if.reset),
-	.req1_cmd_in(calc_if.req1_cmd_in),
-	.req1_data_in(calc_if.req1_data_in),
-	.req1_tag_in(calc_if.req1_tag_in),
-	.req2_cmd_in(calc_if.req2_cmd_in),
-	.req2_data_in(calc_if.req2_data_in),
-	.req2_tag_in(calc_if.req2_tag_in),
-	.req3_cmd_in(calc_if.req3_cmd_in),
-	.req3_data_in(calc_if.req3_data_in),
-	.req3_tag_in(calc_if.req3_tag_in),
-	.req4_cmd_in(calc_if.req4_cmd_in),
-	.req4_data_in(calc_if.req4_data_in),
-	.req4_tag_in(calc_if.req4_tag_in),
-	.out_resp1(calc_if.out_resp1),
-	.out_data1(calc_if.out_data1),
-	.out_tag1(calc_if.out_tag1),
-	.out_resp2(calc_if.out_resp2),
-	.out_data2(calc_if.out_data2),
-	.out_tag2(calc_if.out_tag2),
-	.out_resp3(calc_if.out_resp3),
-	.out_data3(calc_if.out_data3),
-	.out_tag3(calc_if.out_tag3),
-	.out_resp4(calc_if.out_resp4),
-	.out_data4(calc_if.out_data4),
-	.out_tag4(calc_if.out_tag4)
+	.c_clk(calc.c_clk),
+	.reset(calc.reset),
+	.req1_cmd_in(calc.req1_cmd_in),
+	.req1_data_in(calc.req1_data_in),
+	.req1_tag_in(calc.req1_tag_in),
+	.req2_cmd_in(calc.req2_cmd_in),
+	.req2_data_in(calc.req2_data_in),
+	.req2_tag_in(calc.req2_tag_in),
+	.req3_cmd_in(calc.req3_cmd_in),
+	.req3_data_in(calc.req3_data_in),
+	.req3_tag_in(calc.req3_tag_in),
+	.req4_cmd_in(calc.req4_cmd_in),
+	.req4_data_in(calc.req4_data_in),
+	.req4_tag_in(calc.req4_tag_in),
+	.out_resp1(calc.out_resp1),
+	.out_data1(calc.out_data1),
+	.out_tag1(calc.out_tag1),
+	.out_resp2(calc.out_resp2),
+	.out_data2(calc.out_data2),
+	.out_tag2(calc.out_tag2),
+	.out_resp3(calc.out_resp3),
+	.out_data3(calc.out_data3),
+	.out_tag3(calc.out_tag3),
+	.out_resp4(calc.out_resp4),
+	.out_data4(calc.out_data4),
+	.out_tag4(calc.out_tag4)
 );
 
 
