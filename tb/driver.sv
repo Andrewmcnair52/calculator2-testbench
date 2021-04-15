@@ -1,7 +1,7 @@
 
 class Driver; //runs code on DUT by manipulating inputs
 
-  calc_if calc
+  calc_if calc;
   
   function new(calc_if i);
     calc = i;
