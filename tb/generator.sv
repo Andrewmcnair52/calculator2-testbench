@@ -1,4 +1,3 @@
-`include "tb/driver.sv"
 
 class Generator;  //class to generate transactions
 
