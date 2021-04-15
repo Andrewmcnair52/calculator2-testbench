@@ -46,7 +46,7 @@ class Driver; //runs code on DUT by manipulating inputs
     calc.req4_data_in  <= 32'h0;
     calc.req4_tag_in   <= 2'h0;
     
-    responded[4] = '{0,0,0,0};
+    responded = '{0,0,0,0};
   
     for(int i=0; i<t.clock_cycles; i++) begin		//give it specified number of clock cycles to respond
 	  	@(posedge calc.c_clk);
