@@ -17,7 +17,7 @@ module calc2_tb;
 
 initial begin
   
-  //edclare things before statments, or it errors
+  //put declarations before statments, or it errors
   Generator gen;
   Transaction t;
   Driver d;
@@ -25,11 +25,12 @@ initial begin
   $display(); //output seperator
   
   //a test case
-  gen = new();                      //creates transaction in constructor
-  t = gen.trans_queue.pop_back();   //retrieve transaction from generator
-  d = new(calc);                        //construct the driver
-  d.run_single(t);                  //run the transaction       
-  t.print();                        //print results saved in transaction
+  gen = new();    //create generator
+  d = new(calc);  //construct the driver, give it handler for interface
+  
+  //sample add transaction to generator and run
+  gen.add( .p11(32'h22), .p21(32'h3), .c1(4'h2), .t1(2'h2) );  //22-3 on tag2 
+  gen.run(d);     //run transactions with driver
 	
 	$display(); //output seperator
 	$finish;
