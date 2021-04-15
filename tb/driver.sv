@@ -51,25 +51,21 @@ class Driver; //runs code on DUT by manipulating inputs
     for(int i=0; i<t.clock_cycles; i++) begin		//give it specified number of clock cycles to respond
 	  	@(posedge calc.c_clk);
 	  	if (calc.out_tag1==t.tag[0] && responded[0]!=1) begin   //channel 1
-	  	  $display("channel 1 response after %0d cycles", i+1);
 	  	  t.data_out[0] = calc.out_data1;
 	  	  t.resp_out[0] = calc.out_resp1;
 	  	  responded[0] = 1;
 	  	end
 	  	if (calc.out_tag2 == t.tag[1] && responded[1]!=1) begin   //channel 2
-	  	  $display("channel 2 response after %0d cycles", i+1);
 	  	  t.data_out[1] = calc.out_data2;
 	  	  t.resp_out[1] = calc.out_resp2;
 	  	  responded[1] = 1;
 	  	end
 	  	if (calc.out_tag3 == t.tag[2] && responded[2]!=1) begin   //channel 3
-	  	  $display("channel 3 response after %0d cycles", i+1);
 	  	  t.data_out[2] = calc.out_data3;
 	  	  t.resp_out[2] = calc.out_resp3;
 	  	  responded[2] = 1;
 	  	end
 	  	if (calc.out_tag4 == t.tag[3] && responded[3]!=1) begin   //channel 4
-	  	  $display("channel 4 response after %0d cycles", i+1);
 	  	  t.data_out[3] = calc.out_data4;
 	  	  t.resp_out[3] = calc.out_resp4;
 	  	  responded[3] = 1;
