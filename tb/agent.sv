@@ -13,6 +13,9 @@ class Agent;
   endfunction
   
   task run_single(); //run transaction queue
+  
+    Transaction t;
+  
     foreach(gen.trans_queue[i]) begin
       t = driver.run_single(gen.trans_queue[i]);
       ckeck.add(t);
