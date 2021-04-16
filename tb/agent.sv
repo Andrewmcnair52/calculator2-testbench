@@ -19,7 +19,7 @@ class Agent;
     foreach(gen.trans_queue[i]) begin
       t = gen.trans_queue[i];   
       driver.run_single(t);
-      ckeck.add(t);
+      check.add(t);
     end
   endtask
 
