@@ -36,7 +36,7 @@ class Checker;
   
   function print_summary();
   
-  $display("===============================================\nSUMMARY\n===============================================\n")
+  $display("===============================================\nSUMMARY\n===============================================\n");
   $display("errors: %0d   successes: %0d\n", errorCnt, successCnt);
   
     foreach(message_queue[i]) begin
