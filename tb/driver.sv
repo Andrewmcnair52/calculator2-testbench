@@ -12,6 +12,7 @@ class Driver; //runs code on DUT by manipulating inputs
   task automatic run_single(ref Transaction t);  //run a single transaction
   
     do_reset();
+    
     @(posedge calc.c_clk);           //load in command, param1, and tag
     calc.req1_cmd_in   <= t.cmd[0];
     calc.req1_data_in  <= t.param1[0];
@@ -50,22 +51,22 @@ class Driver; //runs code on DUT by manipulating inputs
   
     for(int i=0; i<t.clock_cycles; i++) begin		//give it specified number of clock cycles to respond
 	  	@(posedge calc.c_clk);
-	  	if (calc.out_tag1==t.tag[0] && responded[0]!=1) begin   //channel 1
+	  	if (calc.out_resp1!=0 && responded[0]!=1) begin   //channel 1
 	  	  t.data_out[0] = calc.out_data1;
 	  	  t.resp_out[0] = calc.out_resp1;
 	  	  responded[0] = 1;
 	  	end
-	  	if (calc.out_tag2 == t.tag[1] && responded[1]!=1) begin   //channel 2
+	  	if (calc.out_resp2!=0 && responded[1]!=1) begin   //channel 2
 	  	  t.data_out[1] = calc.out_data2;
 	  	  t.resp_out[1] = calc.out_resp2;
 	  	  responded[1] = 1;
 	  	end
-	  	if (calc.out_tag3 == t.tag[2] && responded[2]!=1) begin   //channel 3
+	  	if (calc.out_resp3!=0 && responded[2]!=1) begin   //channel 3
 	  	  t.data_out[2] = calc.out_data3;
 	  	  t.resp_out[2] = calc.out_resp3;
 	  	  responded[2] = 1;
 	  	end
-	  	if (calc.out_tag4 == t.tag[3] && responded[3]!=1) begin   //channel 4
+	  	if (calc.out_resp4!=0 && responded[3]!=1) begin   //channel 4
 	  	  t.data_out[3] = calc.out_data4;
 	  	  t.resp_out[3] = calc.out_resp4;
 	  	  responded[3] = 1;
