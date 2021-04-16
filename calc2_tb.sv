@@ -38,7 +38,7 @@ initial begin
   
   //run tests
 	agent.run_single();
-	heck.run();
+	check.run();
 	
 	//print output
 	check.print_transactions();
