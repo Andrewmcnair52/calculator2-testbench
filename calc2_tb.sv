@@ -36,7 +36,8 @@ initial begin
   agent = new(gen, driver, check);   //create agent
   
 	agent.run_single();
-	check.print();
+	check.run();
+	check.print_summary();
 	
 	$display(); //output seperator
 	$finish;
