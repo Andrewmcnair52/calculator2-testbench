@@ -29,11 +29,11 @@ initial begin
   gen.add( .p11(32'h158), .p21(32'h12), .c1(4'h2), .p12(32'h158), .p22(32'h12), .c2(4'h2), .p13(32'h158), .p23(32'h12), .c3(4'h2), .p14(32'h158), .p24(32'h12), .c4(4'h2) );
   
   //initialize
-  d = new(calc);                 //create driver
-  c = new();                     //create checker
-  a = new(gen, driver, check);   //create agent
+  driver = new(calc);                 //create driver
+  check = new();                     //create checker
+  agent = new(gen, driver, check);   //create agent
   
-	a.run_single();
+	agent.run_single();
 	ckeck.print()
 	
 	$display(); //output seperator
