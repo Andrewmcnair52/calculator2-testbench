@@ -73,9 +73,11 @@ class Driver; //runs code on DUT by manipulating inputs
 	  	end
 	  end
 	  
+	  /*
 	  $display("finnished running transaction");
 	  t.print();
 	  $display();
+    */
 
   endtask
 
