@@ -36,7 +36,7 @@ class Checker;
   
   function print_summary();
     foreach(message_queue[i]) begin
-      $display(message_queue[i].pop_front());
+      $display(message_queue[i]);
     end
   endfunction
   
