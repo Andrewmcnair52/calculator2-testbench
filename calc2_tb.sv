@@ -38,6 +38,7 @@ initial begin
 	agent.run_single();
 	check.run();
 	check.print_summary();
+	check.print_transactions();
 	
 	$display(); //output seperator
 	$finish;
