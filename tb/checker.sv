@@ -18,7 +18,7 @@ class Checker;
         if(transQ[i].resp_out[j]!=transQ[i].resp_expected[j] || transQ[i].data_out[j] != transQ[i].data_expected[j]) begin   //check response and data
           $sformat(message, "channel %0d: sent %0d %s %0d, received data %0d with resp %0d, expected data %0d with resp %0d", j, transQ[i].param1[j], resolve_op(transQ[i].cmd[j]), transQ[i].param2[j], transQ[i].data_out[j], transQ[i].resp_out[j], transQ[i].data_expected[j], transQ[i].resp_expected[j]);
           message_queue.push_back(message);
-          error_count = err_count + 1;
+          errorCnt = errorCnt + 1;
         end else begin  //if data and response are good, success!
           successCnt = successCnt + 1;
         end
