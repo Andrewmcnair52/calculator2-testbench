@@ -24,6 +24,7 @@ class Checker;
         end
         
       end //end channel loop
+      message_queue.push_back(" "); //line seperator between transactions
     end //end transaction loop
   endfunction
   

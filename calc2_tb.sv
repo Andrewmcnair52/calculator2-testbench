@@ -29,15 +29,20 @@ initial begin
   gen = new(); //create generator
   gen.add( .p11(32'h56), .p21(32'h103), .c1(4'h1), .p12(32'h56), .p22(32'h103), .c2(4'h1), .p13(32'h56), .p23(32'h103), .c3(4'h1), .p14(32'h56), .p24(32'h103), .c4(4'h1) );
   gen.add( .p11(32'h158), .p21(32'h12), .c1(4'h2), .p12(32'h158), .p22(32'h12), .c2(4'h2), .p13(32'h158), .p23(32'h12), .c3(4'h2), .p14(32'h158), .p24(32'h12), .c4(4'h2) );
+  gen.add( .p11(32'h18), .p21(32'h32), .c1(4'h2), .p12(32'h18), .p22(32'h32), .c2(4'h2), .p13(32'h18), .p23(32'h32), .c3(4'h2), .p14(32'h18), .p24(32'h32), .c4(4'h2) );
   
   //initialize
   driver = new(calc);                 //create driver
   check = new();                     //create checker
   agent = new(gen, driver, check);   //create agent
   
+  //run tests
 	agent.run_single();
 	check.run();
+	
+	//print output
 	check.print_summary();
+	$display();
 	check.print_transactions();
 	
 	$display(); //output seperator
