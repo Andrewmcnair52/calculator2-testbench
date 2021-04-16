@@ -5,11 +5,9 @@
 
 module calc2_tb;
 	
-	//initialize clock
-  bit c_clk = 0;
-  
-  //define calculator interface
-  calc_if calc(c_clk);
+	
+  bit c_clk = 0;        //initialize clock
+  calc_if calc(c_clk);  //define calculator interface
 
   //command inputs:
   //Add: 4'h1   Sub: 4'h2
@@ -19,18 +17,24 @@ initial begin
   
   //put declarations before statments, or it errors
   Generator gen;
-  Transaction t;
-  Driver d;
+  Driver driver;
+  Checker check;
+  Agent agent;
   
   $display(); //output seperator
   
-  //a test case
-  gen = new();    //create generator
-  d = new(calc);  //construct the driver, give it handler for interface
+  //generate tests
+  gen = new(); //create generator
+  gen.add( .p11(32'h56), .p21(32'h103), .c1(4'h1), .p12(32'h56), .p22(32'h103), .c2(4'h1), .p13(32'h56), .p23(32'h103), .c3(4'h1), .p14(32'h56), .p24(32'h103), .c4(4'h1) );
+  gen.add( .p11(32'h158), .p21(32'h12), .c1(4'h2), .p12(32'h158), .p22(32'h12), .c2(4'h2), .p13(32'h158), .p23(32'h12), .c3(4'h2), .p14(32'h158), .p24(32'h12), .c4(4'h2) );
   
-  //sample add transaction to generator and run
-  gen.add( .p11(32'h22), .p21(32'h3), .c1(4'h2), .t1(2'h2) );  //22-3 on tag2 
-  gen.run_queue(d);     //run transactions with driver
+  //initialize
+  d = new(calc);                 //create driver
+  c = new();                     //create checker
+  a = new(gen, driver, check);   //create agent
+  
+	a.run_single();
+	ckeck.print()
 	
 	$display(); //output seperator
 	$finish;
