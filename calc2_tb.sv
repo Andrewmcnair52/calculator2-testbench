@@ -38,12 +38,12 @@ initial begin
   
   //run tests
 	agent.run_single();
-	check.run();
+	heck.run();
 	
 	//print output
-	check.print_summary();
-	$display();
 	check.print_transactions();
+	$display();
+	check.print_summary();
 	
 	$display(); //output seperator
 	$finish;

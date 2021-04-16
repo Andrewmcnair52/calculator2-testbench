@@ -29,6 +29,7 @@ class Checker;
   endfunction
   
   function print_transactions();
+    $display("===============================================\nTransactions\n===============================================\n");
     foreach(transQ[i]) begin
       transQ[i].print();
       $display();
