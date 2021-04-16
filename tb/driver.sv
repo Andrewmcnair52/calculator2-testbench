@@ -9,7 +9,7 @@ class Driver; //runs code on DUT by manipulating inputs
     this.calc = calc;                //connect virtual interface to our interface
   endfunction
 
-  task automatic run_single(Transaction t);  //run a single transaction
+  task automatic run_single(ref Transaction t);  //run a single transaction
   
     do_reset();
     
@@ -72,8 +72,6 @@ class Driver; //runs code on DUT by manipulating inputs
 	  	  responded[3] = 1;
 	  	end
 	  end
-
-    return t;
 
   endtask
 

@@ -17,7 +17,8 @@ class Agent;
     Transaction t;
   
     foreach(gen.trans_queue[i]) begin
-      t = driver.run_single(gen.trans_queue[i]);
+      t = gen.trans_queue[i];   
+      driver.run_single(t);
       ckeck.add(t);
     end
   endtask
