@@ -1,6 +1,8 @@
 `include "tb/transaction.sv"
+`include "tb/checker.sv"
 `include "tb/driver.sv"
 `include "tb/generator.sv"
+`include "tb/agent.sv"
 `include "tb/calc_if.sv"
 
 module calc2_tb;
