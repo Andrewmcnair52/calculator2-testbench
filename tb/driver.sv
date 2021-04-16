@@ -12,7 +12,6 @@ class Driver; //runs code on DUT by manipulating inputs
   task automatic run_single(ref Transaction t);  //run a single transaction
   
     do_reset();
-    
     @(posedge calc.c_clk);           //load in command, param1, and tag
     calc.req1_cmd_in   <= t.cmd[0];
     calc.req1_data_in  <= t.param1[0];
@@ -72,6 +71,10 @@ class Driver; //runs code on DUT by manipulating inputs
 	  	  responded[3] = 1;
 	  	end
 	  end
+	  
+	  $display("finnished running transaction");
+	  t.print();
+	  $display();
 
   endtask
 
