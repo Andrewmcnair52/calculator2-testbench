@@ -19,7 +19,6 @@ class Transaction;  //class to store info for a single test
     $display("resp_expec: %h, %h, %h, %h", resp_expected[0],resp_expected[1],resp_expected[2],resp_expected[3]);
     $display("data_out: %h, %h, %h, %h", data_out[0],data_out[1],data_out[2],data_out[3]);
     $display("resp_out: %h, %h, %h, %h", resp_out[0],resp_out[1],resp_out[2],resp_out[3]);
-    $display("clock cycles: %0d", clock_cycles);
     $display();
   endfunction
   
