@@ -32,12 +32,12 @@
 # Loading work.priority
 # Refreshing /nfs/home/q/qi_ia/COEN413/project2/calculator2-testbench/work.shifter
 # Loading work.shifter
-# ** Warning: (vsim-3017) calc2_tb.sv(80): [TFMPC] - Too few port connections. Expected 30, found 26.
+# ** Warning: (vsim-3017) calc2_tb.sv(82): [TFMPC] - Too few port connections. Expected 30, found 26.
 #         Region: /calc2_tb/calc2_top
-# ** Warning: (vsim-3722) calc2_tb.sv(80): [TFMPC] - Missing connection for port 'scan_out'.
-# ** Warning: (vsim-3722) calc2_tb.sv(80): [TFMPC] - Missing connection for port 'a_clk'.
-# ** Warning: (vsim-3722) calc2_tb.sv(80): [TFMPC] - Missing connection for port 'b_clk'.
-# ** Warning: (vsim-3722) calc2_tb.sv(80): [TFMPC] - Missing connection for port 'scan_in'.
+# ** Warning: (vsim-3722) calc2_tb.sv(82): [TFMPC] - Missing connection for port 'scan_out'.
+# ** Warning: (vsim-3722) calc2_tb.sv(82): [TFMPC] - Missing connection for port 'a_clk'.
+# ** Warning: (vsim-3722) calc2_tb.sv(82): [TFMPC] - Missing connection for port 'b_clk'.
+# ** Warning: (vsim-3722) calc2_tb.sv(82): [TFMPC] - Missing connection for port 'scan_in'.
 # ** Warning: (vsim-3017) calc2_top.v(275): [TFMPC] - Too few port connections. Expected 41, found 40.
 #         Region: /calc2_tb/calc2_top/priority1
 # run -all 
@@ -76,12 +76,42 @@
 # clock cycles: 10
 #  
 #  
+# param1: 00000189, 00000038, 000000b7, 000000a2
+# param2: 00000025, 0000002e, 0000004f, 0000016d
+# cmd: b, d, 7, 0
+# data_expec: 00000000, 00000000, 00000000, 00000000
+# resp_expec: 2, 2, 2, 0
+# data_out: 00000000, 00000000, 00000000, 00000000
+# resp_out: 2, 2, 2, 0
+# clock cycles: 10
+#  
+#  
+# param1: 000001e0, 00000163, 00000023, 000001ac
+# param2: 00000055, 000000fd, 00000181, 000001e1
+# cmd: 8, a, 2, 3
+# data_expec: 00000000, 00000000, fffffea2, 00000000
+# resp_expec: 2, 2, 2, 2
+# data_out: 00000000, 00000000, 00000000, 00000000
+# resp_out: 2, 2, 1, 2
+# clock cycles: 10
+#  
+#  
+# param1: 00000061, 000001b0, 000000dd, 00000035
+# param2: 0000009b, 0000008b, 0000018c, 00000144
+# cmd: 3, 9, 4, 6
+# data_expec: 00000000, 00000000, 00000000, 00000000
+# resp_expec: 2, 2, 2, 1
+# data_out: 00000000, 00000000, 00000000, 00000014
+# resp_out: 2, 2, 2, 1
+# clock cycles: 10
+#  
+#  
 #  
 # ===============================================
 # SUMMARY
 # ===============================================
 # 
-# errors: 12   successes: 0
+# errors: 14   successes: 10
 # 
 # error on channel 0: sent 344 - 18, received data 0 with resp 1, expected data 326 with resp 1
 # error on channel 1: sent 344 - 18, received data 0 with resp 1, expected data 326 with resp 1
@@ -99,5 +129,10 @@
 # error on channel 3: sent 24 - 50, received data 0 with resp 2, expected data 4294967270 with resp 2
 #  
 #  
-# ** Note: $finish    : calc2_tb.sv(49)
-#    Time: 4750 ns  Iteration: 1  Instance: /calc2_tb
+# error on channel 2: sent 35 - 385, received data 0 with resp 1, expected data 4294966946 with resp 2
+#  
+# error on channel 3: sent 53 >> 324, received data 20 with resp 1, expected data 0 with resp 1
+#  
+#  
+# ** Note: $finish    : calc2_tb.sv(51)
+#    Time: 9550 ns  Iteration: 1  Instance: /calc2_tb
