@@ -73,7 +73,7 @@ class Driver; //runs code on DUT by manipulating inputs
 
   endtask
   
-  task automatic run_continuous(ref Transaction t)
+  task automatic run_continuous(ref Transaction t);
 
   
   endtask
