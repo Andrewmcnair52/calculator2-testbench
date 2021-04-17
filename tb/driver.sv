@@ -16,16 +16,12 @@ class Driver; //runs code on DUT by manipulating inputs
     @(posedge calc.c_clk);           //load in command, param1, and tag
     calc.req1_cmd_in   <= t.cmd[0];
     calc.req1_data_in  <= t.param1[0];
-    calc.req1_tag_in   <= t.tag[0];
     calc.req2_cmd_in   <= t.cmd[1];
     calc.req2_data_in  <= t.param1[1];
-    calc.req2_tag_in   <= t.tag[1];
     calc.req3_cmd_in   <= t.cmd[2];
     calc.req3_data_in  <= t.param1[2];
-    calc.req3_tag_in   <= t.tag[2];
     calc.req4_cmd_in   <= t.cmd[3];
     calc.req4_data_in  <= t.param1[3];
-    calc.req4_tag_in   <= t.tag[3];
   
     @(posedge calc.c_clk);             //load in param2
     calc.req1_data_in  <= t.param2[0];
@@ -36,16 +32,12 @@ class Driver; //runs code on DUT by manipulating inputs
     @(negedge calc.c_clk);             //clear all inputs
     calc.req1_cmd_in   <= 4'h0;
     calc.req1_data_in  <= 32'h0;
-    calc.req1_tag_in   <= 2'h0;
     calc.req2_cmd_in   <= 4'h0;
     calc.req2_data_in  <= 32'h0;
-    calc.req2_tag_in   <= 2'h0;
     calc.req3_cmd_in   <= 4'h0;
     calc.req3_data_in  <= 32'h0;
-    calc.req3_tag_in   <= 2'h0;
     calc.req4_cmd_in   <= 4'h0;
     calc.req4_data_in  <= 32'h0;
-    calc.req4_tag_in   <= 2'h0;
     
     responded = '{0,0,0,0};
   

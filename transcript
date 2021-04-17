@@ -1,0 +1,103 @@
+# vsim -do {run -all} -c -novopt calc2_tb 
+# //  Questa Sim-64
+# //  Version 10.1e linux_x86_64 Jun 11 2013
+# //
+# //  Copyright 1991-2013 Mentor Graphics Corporation
+# //  All Rights Reserved.
+# //
+# //  THIS WORK CONTAINS TRADE SECRET AND PROPRIETARY INFORMATION
+# //  WHICH IS THE PROPERTY OF MENTOR GRAPHICS CORPORATION OR ITS
+# //  LICENSORS AND IS SUBJECT TO LICENSE TERMS.
+# //
+# Refreshing /nfs/home/q/qi_ia/COEN413/project2/calculator2-testbench/work.calc2_tb
+# Refreshing /nfs/home/q/qi_ia/COEN413/project2/calculator2-testbench/work.calc2_tb_sv_unit
+# Loading sv_std.std
+# Loading work.calc2_tb_sv_unit
+# Loading work.calc2_tb
+# Refreshing /nfs/home/q/qi_ia/COEN413/project2/calculator2-testbench/work.calc_if
+# Loading work.calc_if
+# Refreshing /nfs/home/q/qi_ia/COEN413/project2/calculator2-testbench/work.calc2_top
+# Loading work.calc2_top
+# Refreshing /nfs/home/q/qi_ia/COEN413/project2/calculator2-testbench/work.adder
+# Loading work.adder
+# Refreshing /nfs/home/q/qi_ia/COEN413/project2/calculator2-testbench/work.alu_input_stage
+# Loading work.alu_input_stage
+# Refreshing /nfs/home/q/qi_ia/COEN413/project2/calculator2-testbench/work.alu_output_stage
+# Loading work.alu_output_stage
+# Refreshing /nfs/home/q/qi_ia/COEN413/project2/calculator2-testbench/work.holdreg
+# Loading work.holdreg
+# Refreshing /nfs/home/q/qi_ia/COEN413/project2/calculator2-testbench/work.mux_out
+# Loading work.mux_out
+# Refreshing /nfs/home/q/qi_ia/COEN413/project2/calculator2-testbench/work.priority
+# Loading work.priority
+# Refreshing /nfs/home/q/qi_ia/COEN413/project2/calculator2-testbench/work.shifter
+# Loading work.shifter
+# ** Warning: (vsim-3017) calc2_tb.sv(80): [TFMPC] - Too few port connections. Expected 30, found 26.
+#         Region: /calc2_tb/calc2_top
+# ** Warning: (vsim-3722) calc2_tb.sv(80): [TFMPC] - Missing connection for port 'scan_out'.
+# ** Warning: (vsim-3722) calc2_tb.sv(80): [TFMPC] - Missing connection for port 'a_clk'.
+# ** Warning: (vsim-3722) calc2_tb.sv(80): [TFMPC] - Missing connection for port 'b_clk'.
+# ** Warning: (vsim-3722) calc2_tb.sv(80): [TFMPC] - Missing connection for port 'scan_in'.
+# ** Warning: (vsim-3017) calc2_top.v(275): [TFMPC] - Too few port connections. Expected 41, found 40.
+#         Region: /calc2_tb/calc2_top/priority1
+# run -all 
+#  
+# ===============================================
+# Transactions
+# ===============================================
+# 
+# param1: 00000158, 00000158, 00000158, 00000158
+# param2: 00000012, 00000012, 00000012, 00000012
+# cmd: 2, 2, 2, 2
+# data_expec: 00000146, 00000146, 00000146, 00000146
+# resp_expec: 1, 1, 1, 1
+# data_out: 00000000, 00000000, 00000000, 00000000
+# resp_out: 1, 1, 2, 2
+# clock cycles: 10
+#  
+#  
+# param1: 00000056, 00000056, 00000056, 00000056
+# param2: 00000103, 00000103, 00000103, 00000103
+# cmd: 1, 1, 1, 1
+# data_expec: 00000159, 00000159, 00000159, 00000159
+# resp_expec: 1, 1, 1, 1
+# data_out: 00000206, 00000206, 00000000, 00000000
+# resp_out: 1, 1, 2, 2
+# clock cycles: 10
+#  
+#  
+# param1: 00000018, 00000018, 00000018, 00000018
+# param2: 00000032, 00000032, 00000032, 00000032
+# cmd: 2, 2, 2, 2
+# data_expec: ffffffe6, ffffffe6, ffffffe6, ffffffe6
+# resp_expec: 2, 2, 2, 2
+# data_out: 00000000, 00000000, 00000000, 00000000
+# resp_out: 1, 1, 2, 2
+# clock cycles: 10
+#  
+#  
+#  
+# ===============================================
+# SUMMARY
+# ===============================================
+# 
+# errors: 12   successes: 0
+# 
+# error on channel 0: sent 344 - 18, received data 0 with resp 1, expected data 326 with resp 1
+# error on channel 1: sent 344 - 18, received data 0 with resp 1, expected data 326 with resp 1
+# error on channel 2: sent 344 - 18, received data 0 with resp 2, expected data 326 with resp 1
+# error on channel 3: sent 344 - 18, received data 0 with resp 2, expected data 326 with resp 1
+#  
+# error on channel 0: sent 86 + 259, received data 518 with resp 1, expected data 345 with resp 1
+# error on channel 1: sent 86 + 259, received data 518 with resp 1, expected data 345 with resp 1
+# error on channel 2: sent 86 + 259, received data 0 with resp 2, expected data 345 with resp 1
+# error on channel 3: sent 86 + 259, received data 0 with resp 2, expected data 345 with resp 1
+#  
+# error on channel 0: sent 24 - 50, received data 0 with resp 1, expected data 4294967270 with resp 2
+# error on channel 1: sent 24 - 50, received data 0 with resp 1, expected data 4294967270 with resp 2
+# error on channel 2: sent 24 - 50, received data 0 with resp 2, expected data 4294967270 with resp 2
+# error on channel 3: sent 24 - 50, received data 0 with resp 2, expected data 4294967270 with resp 2
+#  
+#  
+# ** Note: $finish    : calc2_tb.sv(49)
+#    Time: 4750 ns  Iteration: 1  Instance: /calc2_tb
