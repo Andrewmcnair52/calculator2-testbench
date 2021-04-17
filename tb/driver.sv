@@ -28,20 +28,20 @@ class Driver; //runs code on DUT by manipulating inputs
     calc.req2_data_in  <= t.param2[1];
     calc.req3_data_in  <= t.param2[2];
     calc.req4_data_in  <= t.param2[3];
+    calc.req1_cmd_in   <= 4'h0;       //clear command
+    calc.req2_cmd_in   <= 4'h0;
+    calc.req3_cmd_in   <= 4'h0;
+    calc.req4_cmd_in   <= 4'h0;
   
     @(negedge calc.c_clk);             //clear all inputs
-    calc.req1_cmd_in   <= 4'h0;
     calc.req1_data_in  <= 32'h0;
-    calc.req2_cmd_in   <= 4'h0;
     calc.req2_data_in  <= 32'h0;
-    calc.req3_cmd_in   <= 4'h0;
     calc.req3_data_in  <= 32'h0;
-    calc.req4_cmd_in   <= 4'h0;
     calc.req4_data_in  <= 32'h0;
     
     responded = '{0,0,0,0};
   
-    for(int i=0; i<t.clock_cycles; i++) begin		//give it specified number of clock cycles to respond
+    for(int i=0; i<5; i++) begin		//give it 5 clock cycles to respond
 	  	@(posedge calc.c_clk);
 	  	if (calc.out_resp1!=0 && responded[0]!=1) begin   //channel 1
 	  	  t.data_out[0] = calc.out_data1;
@@ -65,15 +65,18 @@ class Driver; //runs code on DUT by manipulating inputs
 	  	end
 	  end
 	  
-	  /*
+	  /* debug info for single transaction run
 	  $display("finnished running transaction");
 	  t.print();
 	  $display();
     */
 
   endtask
+  
+  task automatic run_continuous(ref Transaction t)
 
-
+  
+  endtask
 
   task do_reset;	//reset the device
     begin
