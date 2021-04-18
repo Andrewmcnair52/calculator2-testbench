@@ -68,7 +68,7 @@ class monitor;
             end
           end
         
-        end else if (c1_received[0] && c1_received[1] && c1_received[2] && c1_received[3] && c2_received[0] && c2_received[1] && c2_received[2] &&c 2_received[3] && c3_received[0] && c3_received[1] && c3_received[2] && c3_received[3] && c4_received[0] && c4_received[1] && c4_received[2] && c4_received[3]) begin
+        end else if (c1_received[0] && c1_received[1] && c1_received[2] && c1_received[3] && c2_received[0] && c2_received[1] && c2_received[2] && c2_received[3] && c3_received[0] && c3_received[1] && c3_received[2] && c3_received[3] && c4_received[0] && c4_received[1] && c4_received[2] && c4_received[3]) begin
           //end condition: if every cmd that was supposed to respond did
           i = 21;
         end else begin  //else run test
@@ -77,22 +77,22 @@ class monitor;
           if(calc.out_resp1!=0 && t.c1_cmd[calc.out_tag1]==0) begin   //if response on channel 1 and we havnt already seen that tag
             t.c1_out_resp[calc.out_tag1] = calc.out_resp1;
             t.c1_out_data[calc.out_tag1] = calc.out_data1;
-            c1_cmd[calc.out_tag1] = 1;
+            c1_received[calc.out_tag1] = 1;
           end
           if(calc.out_resp2!=0 && t.c2_cmd[calc.out_tag2]==0) begin  //if response on channel 2 and we havnt already seen that tag
             t.c2_out_resp[calc.out_tag2] = calc.out_resp2;
             t.c2_out_data[calc.out_tag2] = calc.out_data2;
-            c1_cmd[calc.out_tag2] = 1;
+            c2_received[calc.out_tag2] = 1;
           end
           if(calc.out_resp3!=0 && t.c3_cmd[calc.out_tag3]==0) begin  //if response on channel 3 and we havnt already seen that tag
             t.c3_out_resp[calc.out_tag3] = calc.out_resp3;
             t.c3_out_data[calc.out_tag3] = calc.out_data3;
-            c1_cmd[calc.out_tag3] = 1;
+            c3_received[calc.out_tag3] = 1;
           end
           if(calc.out_resp4!=0 && t.c4_cmd[calc.out_tag4]==0) begin  //if response on channel 4 and we havnt already seen that tag
             t.c4_out_resp[calc.out_tag4] = calc.out_resp4;
             t.c4_out_data[calc.out_tag4] = calc.out_data4;
-            c1_cmd[calc.out_tag4] = 1;
+            c4_received[calc.out_tag4] = 1;
           end
         
         end //end else block
