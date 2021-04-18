@@ -11,12 +11,11 @@ module calc2_tb;
   bit c_clk = 0;        //initialize clock
   calc_if calc(c_clk);  //define calculator interface
   
-  mailbox #(Transaction) mbx_single_in;       //filled by generator, emptied by driver
-  mailbox #(Transaction) mbx_continuous_in;
+  mailbox #(Transaction) driver_mbx;      //mailbox for gen to send transactions to driver
+  mailbox #(Transaction) monitor_mbx;     //mailbox for driver to send transactions to monitor
+  mailbox #(Transaction) checker_mbx;     //mailbox for monitor to send transactions to checker
+  mailbox #(Transaction) next_trans_mbx;  //mailbox for monitor to notify driver that it is ready for next transaction
   
-  mailbox #(Transaction) mbx_single_out;      //filled by driver, emptied by checker
-  mailbox #(Transaction) mbx_continuous_out;
-
   //command inputs:
   //Add: 4'h1   Sub: 4'h2
   //SHL: 4'h5   SHR: 4'h6
@@ -36,7 +35,7 @@ initial begin
   driver_mbx = new();     //delivers transactions to driver
   monitor_mbx = new();    //delivers transactions to monitor
   check_mbx = new();      //delivers transactions to checker
-  next_trans_mbx = new()  //notifies driver to run next transaction
+  next_trans_mbx = new(); //notifies driver to run next transaction
   
   //generate tests
   gen = new(driver_mbx); //create generator
@@ -47,7 +46,7 @@ initial begin
   t.add_c3(.p11(32'h158), .p21(32'h12), .c1(4'h2));   //add single test on channel 3
   t.add_c4(.p11(32'h158), .p21(32'h12), .c1(4'h2));   //add single test on channel 4
   
-  gen.add(t)  //add to mailbox
+  gen.add(t);  //add to mailbox
   
   //print transaction as a test
   t.print();

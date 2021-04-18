@@ -1,6 +1,6 @@
 
 
-class monitor;
+class Monitor;
 
   virtual calc_if calc;   //virtual interface to amke our interface available in the class
   mailbox #(Transaction) monitor_mbx;     //get transactions from driver
