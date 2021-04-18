@@ -1,81 +1,71 @@
 
 class Driver; //runs code on DUT by manipulating inputs
 
-  bit responded[4];
-
   virtual calc_if calc;   //virtual interface to amke our interface available in the class
+  mailbox #(Transaction) driver_mbx;      //get transaction from generator
+  mailbox #(Transaction) monitor_mbx;     //send transaction to monitor
+  mailbox #(Transaction) next_trans_mbx;  //receive notifications from monitor
+  int num_transactions;
   
-  function new(virtual calc_if calc); //get the interface from test
+  function new(virtual calc_if calc, mailbox #(Transaction) driver_mbx, monitor_mbk, next_trans_mbx, int num_transactions);
     this.calc = calc;                //connect virtual interface to our interface
+    this.driver_mbx = driver_mbx;
+    this.monitor_mbx = monitor_mbx;
+    this.next_trans_mbx = next_trans_mbx;
+    this.score = score;
+    this.num_transactions = num_transactions;
   endfunction
 
-  task automatic run_single(ref Transaction t);  //run a single transaction
+  task automatic run;  //run driver
   
+    Transaction t;
+    bit[1:0] tag = 2'b00;
+    bit tmp;
+    
     do_reset();
     
-    @(posedge calc.c_clk);           //load in command, param1, and tag
-    calc.req1_cmd_in   <= t.cmd[0];
-    calc.req1_data_in  <= t.param1[0];
-    calc.req2_cmd_in   <= t.cmd[1];
-    calc.req2_data_in  <= t.param1[1];
-    calc.req3_cmd_in   <= t.cmd[2];
-    calc.req3_data_in  <= t.param1[2];
-    calc.req4_cmd_in   <= t.cmd[3];
-    calc.req4_data_in  <= t.param1[3];
-  
-    @(posedge calc.c_clk);             //load in param2
-    calc.req1_data_in  <= t.param2[0];
-    calc.req2_data_in  <= t.param2[1];
-    calc.req3_data_in  <= t.param2[2];
-    calc.req4_data_in  <= t.param2[3];
-    calc.req1_cmd_in   <= 4'h0;       //clear command
-    calc.req2_cmd_in   <= 4'h0;
-    calc.req3_cmd_in   <= 4'h0;
-    calc.req4_cmd_in   <= 4'h0;
-  
-    @(negedge calc.c_clk);             //clear all inputs
-    calc.req1_data_in  <= 32'h0;
-    calc.req2_data_in  <= 32'h0;
-    calc.req3_data_in  <= 32'h0;
-    calc.req4_data_in  <= 32'h0;
+    while(num_transactions>0) begin
     
-    responded = '{0,0,0,0};
-  
-    for(int i=0; i<5; i++) begin		//give it 5 clock cycles to respond
-	  	@(posedge calc.c_clk);
-	  	if (calc.out_resp1!=0 && responded[0]!=1) begin   //channel 1
-	  	  t.data_out[0] = calc.out_data1;
-	  	  t.resp_out[0] = calc.out_resp1;
-	  	  responded[0] = 1;
-	  	end
-	  	if (calc.out_resp2!=0 && responded[1]!=1) begin   //channel 2
-	  	  t.data_out[1] = calc.out_data2;
-	  	  t.resp_out[1] = calc.out_resp2;
-	  	  responded[1] = 1;
-	  	end
-	  	if (calc.out_resp3!=0 && responded[2]!=1) begin   //channel 3
-	  	  t.data_out[2] = calc.out_data3;
-	  	  t.resp_out[2] = calc.out_resp3;
-	  	  responded[2] = 1;
-	  	end
-	  	if (calc.out_resp4!=0 && responded[3]!=1) begin   //channel 4
-	  	  t.data_out[3] = calc.out_data4;
-	  	  t.resp_out[3] = calc.out_resp4;
-	  	  responded[3] = 1;
-	  	end
-	  end
-	  
-	  /* debug info for single transaction run
-	  $display("finnished running transaction");
-	  t.print();
-	  $display();
-    */
+      //send transaction to monitor
+      monitor_mbx.put(t);
+    
+      for(int i=0; i<4; i++) begin  //run all 4 transactions
+        
+        @(posedge calc.c_clk);           //load in command, param1, and tag
+        calc.req1_cmd_in   <= t.c1_cmd[i];
+        calc.req1_data_in  <= t.c1_param1[i];
+        calc.req1_tag_in   <= i;
+        calc.req2_cmd_in   <= t.c2_cmd[i];
+        calc.req2_data_in  <= t.c2_param1[i];
+        calc.req2_tag_in   <= i;
+        calc.req3_cmd_in   <= t.c3_cmd[i];
+        calc.req3_data_in  <= t.c3_param1[i];
+        calc.req3_tag_in   <= i;
+        calc.req4_cmd_in   <= t.c4_cmd[i];
+        calc.req4_data_in  <= t.c4_param1[i];
+        calc.req4_tag_in   <= i;
+        
+        @(posedge calc.c_clk);    //load in param2, clear cmd and tag
+        calc.req1_cmd_in   <= 4'h0;
+        calc.req1_data_in  <= t.c1_param2[i];
+        calc.req1_tag_in   <= 2'h0;
+        calc.req2_cmd_in   <= 4'h0;
+        calc.req2_data_in  <= t.c2_param2[i];
+        calc.req2_tag_in   <= 2'h0;
+        calc.req3_cmd_in   <= 4'h0;
+        calc.req3_data_in  <= t.c3_param2[i];
+        calc.req3_tag_in   <= 2'h0;
+        calc.req4_cmd_in   <= 4'h0;
+        calc.req4_data_in  <= t.c4param2[i];
+        calc.req4_tag_in   <= 2'h0;
+      
+      end // end for loop
+      
+      num_transactions = num_transactions - 1;
+      next_trans_mbx.get(tmp);  //wait for notification from monitor to proceed
+      
+    end
 
-  endtask
-  
-  task automatic run_continuous(ref Transaction t);
-
-  
   endtask
 
   task do_reset;	//reset the device

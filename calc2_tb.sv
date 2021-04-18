@@ -2,7 +2,7 @@
 `include "tb/checker.sv"
 `include "tb/driver.sv"
 `include "tb/generator.sv"
-`include "tb/agent.sv"
+`include "tb/monitor.sv"
 `include "tb/calc_if.sv"
 
 module calc2_tb;
@@ -10,6 +10,12 @@ module calc2_tb;
 	
   bit c_clk = 0;        //initialize clock
   calc_if calc(c_clk);  //define calculator interface
+  
+  mailbox #(Transaction) mbx_single_in;       //filled by generator, emptied by driver
+  mailbox #(Transaction) mbx_continuous_in;
+  
+  mailbox #(Transaction) mbx_single_out;      //filled by driver, emptied by checker
+  mailbox #(Transaction) mbx_continuous_out;
 
   //command inputs:
   //Add: 4'h1   Sub: 4'h2
@@ -18,36 +24,47 @@ module calc2_tb;
 initial begin
   
   //put declarations before statments, or it errors
+  Transaction t;
   Generator gen;
   Driver driver;
+  Monitor monitor;
   Checker check;
-  Agent agent;
   
   $display(); //output seperator
   
+  //initialize mailboxes
+  driver_mbx = new();     //delivers transactions to driver
+  monitor_mbx = new();    //delivers transactions to monitor
+  check_mbx = new();      //delivers transactions to checker
+  next_trans_mbx = new()  //notifies driver to run next transaction
+  
   //generate tests
-  gen = new(); //create generator
+  gen = new(driver_mbx); //create generator
   
-  gen.add_single(.p11(32'h158),.p21(32'h12),.c1(4'h2), .p12(32'h158),.p22(32'h12),.c2(4'h2), .p13(32'h158),.p23(32'h12),.c3(4'h2), .p14(32'h158),.p24(32'h12),.c4(4'h2));
-  gen.add_single(.p11(32'h56),.p21(32'h103),.c1(4'h1), .p12(32'h56),.p22(32'h103),.c2(4'h1), .p13(32'h56),.p23(32'h103),.c3(4'h1), .p14(32'h56),.p24(32'h103),.c4(4'h1));
-  gen.add_single(.p11(32'h18),.p21(32'h32),.c1(4'h2), .p12(32'h18),.p22(32'h32), .c2(4'h2), .p13(32'h18),.p23(32'h32),.c3(4'h2), .p14(32'h18),.p24(32'h32),.c4(4'h2));
+  t = new();
+  t.add_c1(.p11(32'h158), .p21(32'h12), .c1(4'h2));   //add single test on channel 1
+  t.add_c2(.p11(32'h158), .p21(32'h12), .c1(4'h2));   //add single test on channel 2
+  t.add_c3(.p11(32'h158), .p21(32'h12), .c1(4'h2));   //add single test on channel 3
+  t.add_c4(.p11(32'h158), .p21(32'h12), .c1(4'h2));   //add single test on channel 4
   
-  gen.add_continuous(.p11(32'h158),.p21(32'h12),.c1(4'h2), .p12(32'h158),.p22(32'h12),.c2(4'h2), .p13(32'h158),.p23(32'h12),.c3(4'h2), .p14(32'h158),.p24(32'h12),.c4(4'h2));
-  gen.add_continuous(.p11(32'h56),.p21(32'h103),.c1(4'h1), .p12(32'h56),.p22(32'h103),.c2(4'h1), .p13(32'h56),.p23(32'h103),.c3(4'h1), .p14(32'h56),.p24(32'h103),.c4(4'h1));
-  gen.add_continuous(.p11(32'h18),.p21(32'h32),.c1(4'h2), .p12(32'h18),.p22(32'h32), .c2(4'h2), .p13(32'h18),.p23(32'h32),.c3(4'h2), .p14(32'h18),.p24(32'h32),.c4(4'h2));
+  gen.add(t)  //add to mailbox
   
-  //initialize
-  driver = new(calc);                 //create driver
-  check = new();                     //create checker
-  agent = new(gen, driver, check);   //create agent
-  
+  //print transaction as a test
+  t.print();
   
   //run tests
-	agent.run_single();
+  driver = new(calc, driver_mbx, monitor_mbx, next_trans_mbx, 1);    //in the future, number of transactions must be set be generator
+  monitor = new(calc, monitor_mbx, check_mbx, next_trans_mbx, 1);
+  fork
+    driver.run();   //Process-1
+    monitor.run();  //Process-2
+  join
+  
+  //check results
+  check = new(check_mbx);
 	check.run();
 	
 	//print output
-	check.print_transactions();
 	$display();
 	check.print_summary();
 	
