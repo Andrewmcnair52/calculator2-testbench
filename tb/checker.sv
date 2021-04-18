@@ -110,7 +110,7 @@ class Checker;
         t.c1_expected_data[i] = 32'h0;
         t.c1_expected_resp[i] = 2'h0;
       end else if(t.c1_cmd[i]==4'b0001) begin           //addition
-        t.c1_expected_data[i] = t.c1_param1[i] + c1_param2[i];
+        t.c1_expected_data[i] = t.c1_param1[i] + t.c1_param2[i];
         result = t.c1_param1[i] + t.c1_param2[i];
         if(result>max) begin
           t.c1_expected_resp[i] = 2'b10;
@@ -118,7 +118,7 @@ class Checker;
           t.c1_expected_resp[i] = 2'b01;
         end
       end else if(t.c1_cmd[i]==4'b0010) begin           //subtraction
-        t.c1_expected_data[i] = t.c1_param1[i] - c1_param2[i];
+        t.c1_expected_data[i] = t.c1_param1[i] - t.c1_param2[i];
         if(t.c1_param1[i]<t.c1_param2[i]) begin
           t.c1_expected_resp[i] = 2'b10;
         end else begin
@@ -138,7 +138,7 @@ class Checker;
         t.c2_expected_data[i] = 32'h0;
         t.c2_expected_resp[i] = 2'h0;
       end else if(t.c2_cmd[i]==4'b0001) begin           //addition
-        t.c2_expected_data[i] = t.c2_param1[i] + c2_param2[i];
+        t.c2_expected_data[i] = t.c2_param1[i] + t.c2_param2[i];
         result = t.c2_param1[i] + t.c2_param2[i];
         if(result>max) begin
           t.c2_expected_resp[i] = 2'b10;
@@ -146,7 +146,7 @@ class Checker;
           t.c2_expected_resp[i] = 2'b01;
         end
       end else if(t.c2_cmd[i]==4'b0010) begin           //subtraction
-        t.c2_expected_data[i] = t.c2_param1[i] - c2_param2[i];
+        t.c2_expected_data[i] = t.c2_param1[i] - t.c2_param2[i];
         if(t.c2_param1[i]<t.c2_param2[i]) begin
           t.c2_expected_resp[i] = 2'b10;
         end else begin
@@ -166,7 +166,7 @@ class Checker;
         t.c3_expected_data[i] = 32'h0;
         t.c3_expected_resp[i] = 2'h0;
       end else if(t.c3_cmd[i]==4'b0001) begin           //addition
-        t.c3_expected_data[i] = t.c3_param1[i] + c3_param2[i];
+        t.c3_expected_data[i] = t.c3_param1[i] + t.c3_param2[i];
         result = t.c3_param1[i] + t.c3_param2[i];
         if(result>max) begin
           t.c3_expected_resp[i] = 2'b10;
@@ -174,7 +174,7 @@ class Checker;
           t.c3_expected_resp[i] = 2'b01;
         end
       end else if(t.c3_cmd[i]==4'b0010) begin           //subtraction
-        t.c3_expected_data[i] = t.c3_param1[i] - c3_param2[i];
+        t.c3_expected_data[i] = t.c3_param1[i] - t.c3_param2[i];
         if(t.c3_param1[i]<t.c3_param2[i]) begin
           t.c3_expected_resp[i] = 2'b10;
         end else begin
@@ -194,7 +194,7 @@ class Checker;
         t.c4_expected_data[i] = 32'h0;
         t.c4_expected_resp[i] = 2'h0;
       end else if(t.c4_cmd[i]==4'b0001) begin           //addition
-        t.c4_expected_data[i] = t.c4_param1[i] + c4_param2[i];
+        t.c4_expected_data[i] = t.c4_param1[i] + t.c4_param2[i];
         result = t.c4_param1[i] + t.c4_param2[i];
         if(result>max) begin
           t.c4_expected_resp[i] = 2'b10;
@@ -202,7 +202,7 @@ class Checker;
           t.c4_expected_resp[i] = 2'b01;
         end
       end else if(t.c4_cmd[i]==4'b0010) begin           //subtraction
-        t.c4_expected_data[i] = t.c4_param1[i] - c4_param2[i];
+        t.c4_expected_data[i] = t.c4_param1[i] - t.c4_param2[i];
         if(t.c4_param1[i]<t.c4_param2[i]) begin
           t.c4_expected_resp[i] = 2'b10;
         end else begin
