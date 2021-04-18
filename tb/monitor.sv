@@ -100,7 +100,7 @@ class Monitor;
       end //end of for loop: running tests
         
       check_mbx.put(t);         //send transaction to checker
-      next_trans_mbx.out(tmp)   //tell driver to run next transaction
+      next_trans_mbx.out(tmp);  //tell driver to run next transaction
       transaction_count = transaction_count - 1;  //decrement counter
     
     end //end of while loop: counting transactions
