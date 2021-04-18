@@ -55,7 +55,7 @@ class Driver; //runs code on DUT by manipulating inputs
         calc.req3_data_in  <= t.c3_param2[i];
         calc.req3_tag_in   <= 2'h0;
         calc.req4_cmd_in   <= 4'h0;
-        calc.req4_data_in  <= t.c4param2[i];
+        calc.req4_data_in  <= t.c_4param2[i];
         calc.req4_tag_in   <= 2'h0;
       
       end // end for loop

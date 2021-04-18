@@ -22,7 +22,7 @@ class Checker;
     while(check_mbx.num() > 0) begin
     
       check_mbx.get(t); //get transaction
-      t.set_expected;   //set expected values
+      set_expected(t);   //set expected values
       
       for(int i=0; i<4; i++) begin  //for each test in transaction
       
