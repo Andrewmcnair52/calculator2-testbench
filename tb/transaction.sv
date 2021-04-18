@@ -63,43 +63,5 @@ class Transaction;  //class to store info for a single test
     c4_param2 = '{ p21, p22, p23, p24 };
     c4_cmd = '{ c1, c2, c3, c4 };
   endfunction
-  
-  
-  
-  function setExpected; //set expected values(scoreboard)
-  
-    longint result, max = 64'h00000000FFFFFFFF;  //variables for overflow detection
-  
-    for(int i=0; i<4; i++) begin  //foreach channel
-      
-      if(cmd[i]==4'b0000) begin                    //no command
-        //do nothing, expected values default to 0 which is expected for this case
-      end else if(cmd[i]==4'b0001) begin           //addition
-        data_expected[i] = param1[i] + param2[i];
-        result = param1[i] + param2[i];
-        if(result>max) begin
-          resp_expected[i] = 2'b10;
-        end else begin
-          resp_expected[i] = 2'b01;
-        end
-      end else if(cmd[i]==4'b0010) begin           //subtraction
-        data_expected[i] = param1[i] - param2[i];
-        if(param1[i]<param2[i]) begin
-          resp_expected[i] = 2'b10;
-        end else begin
-          resp_expected[i] = 2'b01;
-        end
-      end else if(cmd[i]==4'b0101) begin           //shift left
-        data_expected[i] = param1[i] << param2[i];
-        resp_expected[i] = 2'b01;
-      end else if(cmd[i]==4'b0110) begin           //shift right
-        data_expected[i] = param1[i] >> param2[i];
-        resp_expected[i] = 2'b01;
-      end else begin                                  //invalid command
-        resp_expected[i] = 2'b10;
-      end
-      
-    end    //end for loop
-  endfunction
 
 endclass

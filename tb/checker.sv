@@ -100,7 +100,7 @@ class Checker;
   
   
   
-  function set_expected(ref Transaction t) begin
+  function set_expected(ref Transaction t);
     
     longint result, max = 64'h00000000FFFFFFFF;  //variables for overflow detection
     

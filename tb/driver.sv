@@ -12,7 +12,6 @@ class Driver; //runs code on DUT by manipulating inputs
     this.driver_mbx = driver_mbx;
     this.monitor_mbx = monitor_mbx;
     this.next_trans_mbx = next_trans_mbx;
-    this.score = score;
     this.num_transactions = num_transactions;
   endfunction
 

@@ -13,7 +13,6 @@ class monitor;
     this.monitor_mbx = monitor_mbx;
     this.check_mbx = check_mbx;
     this.next_trans_mbx = next_trans_mbx;
-    this.score = score;
     this.num_transactions = num_transactions;
   endfunction
 
@@ -40,16 +39,36 @@ class monitor;
       
       //set recieved if no response expected
       for(int i=0; i<4; i++) begin
-        if(c1_cmd[i] == 0) c1_received[i] = 1;
-        if(c2_cmd[i] == 0) c1_received[i] = 1;
-        if(c3_cmd[i] == 0) c1_received[i] = 1;
-        if(c4_cmd[i] == 0) c1_received[i] = 1;
+        if(t.c1_cmd[i] == 0) c1_received[i] = 1;
+        if(t.c2_cmd[i] == 0) c1_received[i] = 1;
+        if(t.c3_cmd[i] == 0) c1_received[i] = 1;
+        if(t.c4_cmd[i] == 0) c1_received[i] = 1;
       end
       
       for(int i=0; i<21; i++) begin   //timeout after 20 clock cycles
+        
         if(i==20) begin //timeout triggered
         
-        end else if(c1_cmd[0]&&c1_cmd[1]&&c1_cmd[2]&&c1_cmd[3]&&c2_cmd[0]&&c2_cmd[1]&&c2_cmd[2]&&c2_cmd[3]&&c3_cmd[0]&&c3_cmd[1]&&c3_cmd[2]&&c3_cmd[3]&&c4_cmd[0]&&c4_cmd[1]&&c4_cmd[2]&&c4_cmd[3]&&) begin
+          for int(j=0; j<4; j++) begin
+            if(c1_received[j]==0) begin
+              t.c1_out_data[j] = 32'h0;
+              t.c1_out_resp[j] = 32'h0;
+            end
+            if(c2_received[j]==0) begin
+              t.c2_out_data[j] = 32'h0;
+              t.c2_out_resp[j] = 32'h0;
+            end
+            if(c3_received[j]==0) begin
+              t.c3_out_data[j] = 32'h0;
+              t.c3_out_resp[j] = 32'h0;
+            end
+            if(c4_received[j]==0) begin
+              t.c4_out_data[j] = 32'h0;
+              t.c4_out_resp[j] = 32'h0;
+            end
+          end
+        
+        end else if(c1_received[0]&&c1_received[1]&&c1_received[2]&&c1_received[3]&&c2_received[0]&&c2_received[1]&&c2_received[2]&&c2_received[3]&&c3_received[0]&&c3_received[1]&&c3_received[2]&&c3_received[3]&&c4_received[0]&&c4_received[1]&&c4_received[2]&&c4_received[3]&&) begin
           //end condition: if every cmd that was supposed to respond did
           i = 21;
         end else begin
