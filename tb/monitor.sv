@@ -5,10 +5,10 @@ class Monitor;
   virtual calc_if calc;   //virtual interface to amke our interface available in the class
   mailbox #(Transaction) monitor_mbx;     //get transactions from driver
   mailbox #(Transaction) check_mbx;       //send transactions to checker
-  mailbox #(Transaction) next_trans_mbx;  //notify driver to run next command
+  mailbox #(bit) next_trans_mbx;  //notify driver to run next command
   int num_transactions;
   
-  function new(virtual calc_if calc, mailbox #(Transaction) monitor_mbx, check_mbx, next_trans_mbx, int num_transactions);
+  function new(virtual calc_if calc, mailbox #(Transaction) monitor_mbx, check_mbx, mailbox #(bit) next_trans_mbx, int num_transactions);
     this.calc = calc;                //connect virtual interface to our interface
     this.monitor_mbx = monitor_mbx;
     this.check_mbx = check_mbx;

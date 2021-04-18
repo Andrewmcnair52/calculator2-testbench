@@ -14,7 +14,7 @@ module calc2_tb;
   mailbox #(Transaction) driver_mbx;      //mailbox for gen to send transactions to driver
   mailbox #(Transaction) monitor_mbx;     //mailbox for driver to send transactions to monitor
   mailbox #(Transaction) check_mbx;     //mailbox for monitor to send transactions to checker
-  mailbox #(Transaction) next_trans_mbx;  //mailbox for monitor to notify driver that it is ready for next transaction
+  mailbox #(bit) next_trans_mbx;  //mailbox for monitor to notify driver that it is ready for next transaction
   
   //command inputs:
   //Add: 4'h1   Sub: 4'h2

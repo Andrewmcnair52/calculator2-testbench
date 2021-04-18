@@ -4,10 +4,10 @@ class Driver; //runs code on DUT by manipulating inputs
   virtual calc_if calc;   //virtual interface to amke our interface available in the class
   mailbox #(Transaction) driver_mbx;      //get transaction from generator
   mailbox #(Transaction) monitor_mbx;     //send transaction to monitor
-  mailbox #(Transaction) next_trans_mbx;  //receive notifications from monitor
+  mailbox #(bit) next_trans_mbx;  //receive notifications from monitor
   int num_transactions;
   
-  function new(virtual calc_if calc, mailbox #(Transaction) driver_mbx, monitor_mbk, next_trans_mbx, int num_transactions);
+  function new(virtual calc_if calc, mailbox #(Transaction) driver_mbx, monitor_mbk, mailbox #(bit) next_trans_mbx, int num_transactions);
     this.calc = calc;                //connect virtual interface to our interface
     this.driver_mbx = driver_mbx;
     this.monitor_mbx = monitor_mbx;
