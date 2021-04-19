@@ -25,8 +25,9 @@ class Driver; //runs code on DUT by manipulating inputs
     
     while(num_transactions>0) begin
     
-      //send transaction to monitor
-      monitor_mbx.put(t);
+      
+      driver_mbx(t);      //get next transaction to run from mailbox
+      monitor_mbx.put(t); //send transaction to monitor
     
       for(int i=0; i<4; i++) begin  //run all 4 transactions
         
