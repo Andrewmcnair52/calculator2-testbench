@@ -45,13 +45,7 @@ initial begin
   t.add_c2(.p11(32'h158), .p21(32'h12), .c1(4'h2));   //add single test on channel 2
   t.add_c3(.p11(32'h158), .p21(32'h12), .c1(4'h2));   //add single test on channel 3
   t.add_c4(.p11(32'h158), .p21(32'h12), .c1(4'h2));   //add single test on channel 4
-  
   gen.add(t);  //add to mailbox
-  
-  //print transaction as a test
-  $display("initial transaction: ");
-  t.print();
-  $display("driver_mbx.num(): ", driver_mbx.num());
   
   //run tests
   driver = new(calc, driver_mbx, monitor_mbx, next_trans_mbx, 1);    //in the future, number of transactions must be set be generator

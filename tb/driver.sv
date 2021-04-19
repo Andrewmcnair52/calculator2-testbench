@@ -7,7 +7,7 @@ class Driver; //runs code on DUT by manipulating inputs
   mailbox #(bit) next_trans_mbx;  //receive notifications from monitor
   int num_transactions;
   
-  function new(virtual calc_if calc, mailbox #(Transaction) driver_mbx, monitor_mbk, mailbox #(bit) next_trans_mbx, int num_transactions);
+  function new(virtual calc_if calc, mailbox #(Transaction) driver_mbx, monitor_mbx, mailbox #(bit) next_trans_mbx, int num_transactions);
     this.calc = calc;                //connect virtual interface to our interface
     this.driver_mbx = driver_mbx;
     this.monitor_mbx = monitor_mbx;
@@ -26,6 +26,11 @@ class Driver; //runs code on DUT by manipulating inputs
     while(num_transactions>0) begin
       
       driver_mbx.get(t);      //get next transaction to run from mailbox
+      
+      $display("running transaction: ");
+      t.print();
+      $display("driver_mbx.num(): %0d", driver_mbx.num());
+      
       monitor_mbx.put(t);     //send transaction to monitor
     
       for(int i=0; i<4; i++) begin  //run all 4 transactions
