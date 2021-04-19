@@ -49,7 +49,9 @@ initial begin
   gen.add(t);  //add to mailbox
   
   //print transaction as a test
+  $display("initial transaction: ");
   t.print();
+  $display("driver_mbx.num(): ", driver_mbx.num());
   
   //run tests
   driver = new(calc, driver_mbx, monitor_mbx, next_trans_mbx, 1);    //in the future, number of transactions must be set be generator
