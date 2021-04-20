@@ -48,15 +48,15 @@ initial begin
   gen.add(t);  //add to mailbox
   
   t = new();
-  t.add_c1(.p11(32'h158),.p12(32'h158),.p13(32'h158),.p14(32'h158),.p21(32'h12),.p22(32'h12),.p23(32'h4),.p24(32'h4),.c1(4'h1),.c2(4'h2),.c3(4'h5),.c4(4'h6));
-  t.add_c2(.p11(32'h158),.p12(32'h158),.p13(32'h158),.p14(32'h158),.p21(32'h12),.p22(32'h12),.p23(32'h4),.p24(32'h4),.c1(4'h1),.c2(4'h2),.c3(4'h5),.c4(4'h6));
-  t.add_c3(.p11(32'h158),.p12(32'h158),.p13(32'h158),.p14(32'h158),.p21(32'h12),.p22(32'h12),.p23(32'h4),.p24(32'h4),.c1(4'h1),.c2(4'h2),.c3(4'h5),.c4(4'h6));
-  t.add_c4(.p11(32'h158),.p12(32'h158),.p13(32'h158),.p14(32'h158),.p21(32'h12),.p22(32'h12),.p23(32'h4),.p24(32'h4),.c1(4'h1),.c2(4'h2),.c3(4'h5),.c4(4'h6));
+  t.add_c1(.p11(32'h158),.p12(32'h158),.p13(32'h158),.p14(32'h158),.p21(32'h12),.p22(32'h4),.p23(32'h12),.p24(32'h4),.c1(4'h1),.c2(4'h5),.c3(4'h2),.c4(4'h6));
+  t.add_c2(.p11(32'h158),.p12(32'h158),.p13(32'h158),.p14(32'h158),.p21(32'h12),.p22(32'h4),.p23(32'h12),.p24(32'h4),.c1(4'h1),.c2(4'h5),.c3(4'h2),.c4(4'h6));
+  t.add_c3(.p11(32'h158),.p12(32'h158),.p13(32'h158),.p14(32'h158),.p21(32'h12),.p22(32'h4),.p23(32'h12),.p24(32'h4),.c1(4'h1),.c2(4'h5),.c3(4'h2),.c4(4'h6));
+  t.add_c4(.p11(32'h158),.p12(32'h158),.p13(32'h158),.p14(32'h158),.p21(32'h12),.p22(32'h4),.p23(32'h12),.p24(32'h4),.c1(4'h1),.c2(4'h5),.c3(4'h2),.c4(4'h6));
   gen.add(t);  //add to mailbox
   
   //run tests
-  driver = new(calc, driver_mbx, monitor_mbx, next_trans_mbx, 1);    //in the future, number of transactions must be set be generator
-  monitor = new(calc, monitor_mbx, check_mbx, next_trans_mbx, 1);
+  driver = new(calc, driver_mbx, monitor_mbx, next_trans_mbx, 2);    //in the future, number of transactions must be set be generator
+  monitor = new(calc, monitor_mbx, check_mbx, next_trans_mbx, 2);
   fork
     driver.run();   //Process-1
     monitor.run();  //Process-2
