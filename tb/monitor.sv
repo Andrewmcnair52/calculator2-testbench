@@ -37,6 +37,10 @@ class Monitor;
       //receive next transaction from driver
       monitor_mbx.get(t);
       
+      $display("monitoring transaction: ");
+      t.print();
+      $display();
+      
       //set recieved if no response expected
       for(int i=0; i<4; i++) begin
         if(t.c1_cmd[i] == 0) c1_received[i] = 1;
@@ -74,22 +78,27 @@ class Monitor;
         end else begin  //else run test
         
           @(posedge calc.c_clk);
-          if(calc.out_resp1!=0 && t.c1_cmd[calc.out_tag1]==0) begin   //if response on channel 1 and we havnt already seen that tag
+          $display("monitor: iteration %0d", i);
+          if(calc.out_resp1!=0 && t.c1_received[calc.out_tag1]==0) begin   //if response on channel 1 and we havnt already seen that tag
+            $display("response on channel 1, tag %0d", calc.out_tag1);
             t.c1_out_resp[calc.out_tag1] = calc.out_resp1;
             t.c1_out_data[calc.out_tag1] = calc.out_data1;
             c1_received[calc.out_tag1] = 1;
           end
-          if(calc.out_resp2!=0 && t.c2_cmd[calc.out_tag2]==0) begin  //if response on channel 2 and we havnt already seen that tag
+          if(calc.out_resp2!=0 && t.c2_received[calc.out_tag2]==0) begin  //if response on channel 2 and we havnt already seen that tag
+          $display("response on channel 2, tag %0d", calc.out_tag2);
             t.c2_out_resp[calc.out_tag2] = calc.out_resp2;
             t.c2_out_data[calc.out_tag2] = calc.out_data2;
             c2_received[calc.out_tag2] = 1;
           end
-          if(calc.out_resp3!=0 && t.c3_cmd[calc.out_tag3]==0) begin  //if response on channel 3 and we havnt already seen that tag
+          if(calc.out_resp3!=0 && t.c3_received[calc.out_tag3]==0) begin  //if response on channel 3 and we havnt already seen that tag
+            $display("response on channel 3, tag %0d", calc.out_tag3);
             t.c3_out_resp[calc.out_tag3] = calc.out_resp3;
             t.c3_out_data[calc.out_tag3] = calc.out_data3;
             c3_received[calc.out_tag3] = 1;
           end
-          if(calc.out_resp4!=0 && t.c4_cmd[calc.out_tag4]==0) begin  //if response on channel 4 and we havnt already seen that tag
+          if(calc.out_resp4!=0 && t.c4_received[calc.out_tag4]==0) begin  //if response on channel 4 and we havnt already seen that tag
+            $display("response on channel 4, tag %0d", calc.out_tag4);
             t.c4_out_resp[calc.out_tag4] = calc.out_resp4;
             t.c4_out_data[calc.out_tag4] = calc.out_data4;
             c4_received[calc.out_tag4] = 1;
