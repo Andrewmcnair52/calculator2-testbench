@@ -53,6 +53,8 @@ class Monitor;
         
         if(i==20) begin //timeout triggered
         
+          $display("timeout triggered");
+        
           for (int j=0; j<4; j++) begin
             if(c1_received[j]==0) begin
               t.c1_out_data[j] = 32'h0;
@@ -74,36 +76,42 @@ class Monitor;
         
         end else if (c1_received[0] && c1_received[1] && c1_received[2] && c1_received[3] && c2_received[0] && c2_received[1] && c2_received[2] && c2_received[3] && c3_received[0] && c3_received[1] && c3_received[2] && c3_received[3] && c4_received[0] && c4_received[1] && c4_received[2] && c4_received[3]) begin
           //end condition: if every cmd that was supposed to respond did
+          $display("every test has responded, moving on ...");
           i = 21;
         end else begin  //else run test
         
           @(posedge calc.c_clk);
+          $display("clock_cycle: %0d", i);
           if(calc.out_resp1!=0 && c1_received[calc.out_tag1]==0) begin   //if response on channel 1 and we havnt already seen that tag
-            $display("monitor iteration %0d: response on channel 1, tag %0d", i, calc.out_tag1);
+            $display("response on channel 1, tag %0d", calc.out_tag1);
             t.c1_out_resp[calc.out_tag1] = calc.out_resp1;
             t.c1_out_data[calc.out_tag1] = calc.out_data1;
             c1_received[calc.out_tag1] = 1;
           end
           if(calc.out_resp2!=0 && c2_received[calc.out_tag2]==0) begin  //if response on channel 2 and we havnt already seen that tag
-          $display("monitor iteration %0d: response on channel 2, tag %0d", i, calc.out_tag2);
+          $display("response on channel 2, tag %0d", calc.out_tag2);
             t.c2_out_resp[calc.out_tag2] = calc.out_resp2;
             t.c2_out_data[calc.out_tag2] = calc.out_data2;
             c2_received[calc.out_tag2] = 1;
           end
           if(calc.out_resp3!=0 && c3_received[calc.out_tag3]==0) begin  //if response on channel 3 and we havnt already seen that tag
-            $display("monitor iteration %0d: response on channel 3, tag %0d", i, calc.out_tag3);
+            $display("response on channel 3, tag %0d", calc.out_tag3);
             t.c3_out_resp[calc.out_tag3] = calc.out_resp3;
             t.c3_out_data[calc.out_tag3] = calc.out_data3;
             c3_received[calc.out_tag3] = 1;
           end
           if(calc.out_resp4!=0 && c4_received[calc.out_tag4]==0) begin  //if response on channel 4 and we havnt already seen that tag
-            $display("monitor iteration %0d: response on channel 4, tag %0d", i, calc.out_tag4);
+            $display("response on channel 4, tag %0d", calc.out_tag4);
             t.c4_out_resp[calc.out_tag4] = calc.out_resp4;
             t.c4_out_data[calc.out_tag4] = calc.out_data4;
             c4_received[calc.out_tag4] = 1;
           end
+          
+          //debug output seperator
+          @(negedge calc.c_clk);
+          $display();
         
-        end //end else block
+        end //end else block: else run tests
       
       end //end of for loop: running tests
         

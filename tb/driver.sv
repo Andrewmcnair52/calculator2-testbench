@@ -27,16 +27,11 @@ class Driver; //runs code on DUT by manipulating inputs
       
       driver_mbx.get(t);      //get next transaction to run from mailbox
       
-      $display("running transaction: ");
-      t.print();
-      $display();
-      
       monitor_mbx.put(t);     //send transaction to monitor
     
       for(int i=0; i<4; i++) begin  //run all 4 transactions
         
         @(posedge calc.c_clk);           //load in command, param1, and tag
-        $display("driver: driving inputs %0d", i);
         calc.req1_cmd_in   <= t.c1_cmd[i];
         calc.req1_data_in  <= t.c1_param1[i];
         calc.req1_tag_in   <= i;
