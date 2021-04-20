@@ -97,7 +97,7 @@ class Monitor;
             t.c3_out_data[calc.out_tag3] = calc.out_data3;
             c3_received[calc.out_tag3] = 1;
           end
-          if(calc.out_resp4!=0 && t.c4_received[calc.out_tag4]==0) begin  //if response on channel 4 and we havnt already seen that tag
+          if(calc.out_resp4!=0 && c4_received[calc.out_tag4]==0) begin  //if response on channel 4 and we havnt already seen that tag
             $display("response on channel 4, tag %0d", calc.out_tag4);
             t.c4_out_resp[calc.out_tag4] = calc.out_resp4;
             t.c4_out_data[calc.out_tag4] = calc.out_data4;
