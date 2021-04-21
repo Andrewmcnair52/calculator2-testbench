@@ -27,15 +27,13 @@ class Monitor;
     C4_CMD:    coverpoint t.c1_cmd[array_index];
   endgroup
   
-  cg_values cg_values_inst;
-  
   function new(virtual calc_if calc, mailbox #(Transaction) monitor_mbx, check_mbx, mailbox #(bit) next_trans_mbx, int num_transactions);
     this.calc = calc;                //connect virtual interface to our interface
     this.monitor_mbx = monitor_mbx;
     this.check_mbx = check_mbx;
     this.next_trans_mbx = next_trans_mbx;
     this.num_transactions = num_transactions;
-    cg_values_inst = new();
+    cg_values = new();
   endfunction
 
   task automatic run;  //run a single transaction
@@ -65,7 +63,7 @@ class Monitor;
       end
       
       //sample coverage info
-      foreach(t.c1_param1[i]) cg_values_inst.sample(i);
+      foreach(t.c1_param1[i]) cg_values.sample(i);
       
       //set recieved if no response expected
       for(int i=0; i<4; i++) begin
@@ -144,7 +142,7 @@ class Monitor;
     end //end of while loop: counting transactions
     
     //after transactions are done running, print functional coverage
-    $display("input value coverage: %0.2f %%"cg_values_inst.get_inst_coverage());
+    $display("input value coverage: %0.2f %%", cg_values.get_inst_coverage());
   
   endtask
   
