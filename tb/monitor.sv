@@ -142,10 +142,9 @@ class Monitor;
     end //end of while loop: counting transactions
     
     //after transactions are done running, print functional coverage
-    $display("===============================================\nFunctional Coverage\n===============================================\n");
+    $display("===============================================\nFunctional Coverage\n===============================================");
     $display();
     $display("input value coverage: %0.2f %%", cg_values.get_inst_coverage());
-    $display();
   
   endtask
   
