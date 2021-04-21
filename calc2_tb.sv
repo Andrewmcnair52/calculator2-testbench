@@ -28,8 +28,6 @@ initial begin
   Driver driver;
   Monitor monitor;
   Checker check;
-  cg cg_inst;
-  int i;
   
   $display(); //output seperator
   
