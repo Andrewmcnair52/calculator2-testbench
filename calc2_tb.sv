@@ -60,7 +60,7 @@ initial begin
   t = new();
   if( !t.randomize()) begin
     $display("could not randomize");
-    $finish
+    $finish;
   end else begin
     t.print();
     $display();
