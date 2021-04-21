@@ -10,6 +10,10 @@ module calc2_tb;
 	
   bit c_clk = 0;        //initialize clock
   calc_if calc(c_clk);  //define calculator interface
+  bit [31:0] p11, p12, p13, p14, p21, p22, p23, p24;
+  bit [3:0] c1, c2, c3, c4;
+  bit[3:0] command[4]='{4'h1,4'h2,4'h5,4'h6};
+  bit [2:0] mode;
   
   mailbox #(Transaction) driver_mbx;      //mailbox for gen to send transactions to driver
   mailbox #(Transaction) monitor_mbx;     //mailbox for driver to send transactions to monitor
@@ -19,6 +23,16 @@ module calc2_tb;
   //command inputs:
   //Add: 4'h1   Sub: 4'h2
   //SHL: 4'h5   SHR: 4'h6
+  
+  covergroup cg;
+  cp_c1 : coverpoint c1 {bins one = {1};bins two = {2};bins five = {5};bins six = {6};}
+  cp_c2 : coverpoint c2 {bins one = {1};bins two = {2};bins five = {5};bins six = {6};}
+  cp_c3 : coverpoint c3 {bins one = {1};bins two = {2};bins five = {5};bins six = {6};}
+  cp_c4 : coverpoint c4 {bins one = {1};bins two = {2};bins five = {5};bins six = {6};}
+  endgroup
+  
+  
+
 
 initial begin
   
@@ -28,6 +42,8 @@ initial begin
   Driver driver;
   Monitor monitor;
   Checker check;
+  cg cg_inst;
+  int i;
   
   $display(); //output seperator
   
@@ -53,14 +69,31 @@ initial begin
   t.add_c3(.p11(32'h158),.p12(32'h158),.p13(32'h158),.p14(32'h158),.p21(32'h12),.p22(32'h4),.p23(32'h12),.p24(32'h4),.c1(4'h1),.c2(4'h5),.c3(4'h2),.c4(4'h6));
   t.add_c4(.p11(32'h158),.p12(32'h158),.p13(32'h158),.p14(32'h158),.p21(32'h12),.p22(32'h4),.p23(32'h12),.p24(32'h4),.c1(4'h1),.c2(4'h5),.c3(4'h2),.c4(4'h6));
   gen.add(t);  //add to mailbox
-  
+   
+  //Generate random
+   cg_inst = new();  
+
+    for(i=0;i<3;i++)begin
+     p11=$urandom%500; p12=$urandom%500; p13=$urandom%500; p14=$urandom%500; p21=$urandom%500; p22=$urandom%500; p23=$urandom%500; p24=$urandom%500;
+	 c1=command[$urandom%4]; c2=command[$urandom%4]; c3=command[$urandom%4]; c4 =command[$urandom%4];
+        t = new();
+        t.add_c1(p11,p12,p13,p14,p21,p22,p23,p24,c1,c2,c3,c4);
+        t.add_c2(p11,p12,p13,p14,p21,p22,p23,p24,c1,c2,c3,c4);
+        t.add_c3(p11,p12,p13,p14,p21,p22,p23,p24,c1,c2,c3,c4);
+        t.add_c4(p11,p12,p13,p14,p21,p22,p23,p24,c1,c2,c3,c4);
+        gen.add(t);
+		cg_inst.sample();
+     end
+
   //run tests
-  driver = new(calc, driver_mbx, monitor_mbx, next_trans_mbx, 2);    //in the future, number of transactions must be set be generator
-  monitor = new(calc, monitor_mbx, check_mbx, next_trans_mbx, 2);
+  driver = new(calc, driver_mbx, monitor_mbx, next_trans_mbx,5);    //in the future, number of transactions must be set be generator
+  monitor = new(calc, monitor_mbx, check_mbx, next_trans_mbx,5);
   fork
     driver.run();   //Process-1
     monitor.run();  //Process-2
   join
+  
+  
   
   //check results
   check = new(check_mbx);
@@ -69,6 +102,9 @@ initial begin
 	//print output
 	$display();
 	check.print_summary();
+	//coverage
+ 
+    $display("Coverage = %0.2f%%",cg_inst.get_coverage());
 	
 	$display(); //output seperator
 	$finish;
