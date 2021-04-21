@@ -26,9 +26,9 @@ class Transaction;  //class to store info for a single test
   bit[1:0] c4_out_resp[4], c4_expected_resp[4];
   
   constraint c1 { foreach(c1_cmd[i]) { c1_cmd[i] inside {1,2,5,6}; c1_cmd[i]>4 -> c1_param2[i]<32; } }
-  constraint c2 { foreach(c2_cmd[i]) { c1_cmd[i] inside {1,2,5,6}; c1_cmd[i]>4 -> c1_param2[i]<32; } }
-  constraint c3 { foreach(c3_cmd[i]) { c1_cmd[i] inside {1,2,5,6}; c1_cmd[i]>4 -> c1_param2[i]<32; } }
-  constraint c4 { foreach(c4_cmd[i]) { c1_cmd[i] inside {1,2,5,6}; c1_cmd[i]>4 -> c1_param2[i]<32; } }
+  constraint c2 { foreach(c2_cmd[i]) { c2_cmd[i] inside {1,2,5,6}; c2_cmd[i]>4 -> c2_param2[i]<32; } }
+  constraint c3 { foreach(c3_cmd[i]) { c3_cmd[i] inside {1,2,5,6}; c3_cmd[i]>4 -> c3_param2[i]<32; } }
+  constraint c4 { foreach(c4_cmd[i]) { c4_cmd[i] inside {1,2,5,6}; c4_cmd[i]>4 -> c4_param2[i]<32; } }
   
   function print(); //display test data for debugging purposes
     $display("Ch1 param1: %h, %h, %h, %h", c1_param1[0],c1_param1[1],c1_param1[2],c1_param1[3]);
