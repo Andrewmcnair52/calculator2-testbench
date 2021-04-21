@@ -57,33 +57,18 @@ initial begin
   //generate tests
   gen = new(driver_mbx); //create generator
   
-  for(int i=0; i<3; i++) begin
-  t = new();
-  if( !t.randomize()) begin
-    $display("could not randomize");
-    $finish;
-  end else begin
-    t.print();
-    $display();
-  end
-  
-  end
-  
-    
-  
   //Generate random
    cg_inst = new();  
 
     for(i=0; i<num_tests; i++) begin
-        p11=$urandom%500; p12=$urandom%500; p13=$urandom%500; p14=$urandom%500; p21=$urandom%500; p22=$urandom%500; p23=$urandom%500; p24=$urandom%500;
-	      c1=command[$urandom%4]; c2=command[$urandom%4]; c3=command[$urandom%4]; c4 =command[$urandom%4];
         t = new();
-        t.add_c1(p11,p12,p13,p14,p21,p22,p23,p24,c1,c2,c3,c4);
-        t.add_c2(p11,p12,p13,p14,p21,p22,p23,p24,c1,c2,c3,c4);
-        t.add_c3(p11,p12,p13,p14,p21,p22,p23,p24,c1,c2,c3,c4);
-        t.add_c4(p11,p12,p13,p14,p21,p22,p23,p24,c1,c2,c3,c4);
-        gen.add(t);
-		    cg_inst.sample();
+        if( !t.randomize()) begin
+          $display("could not randomize");
+          $finish;
+        end else begin
+          gen.add(t);
+		      cg_inst.sample();
+		    end
      end
 
   //run tests
