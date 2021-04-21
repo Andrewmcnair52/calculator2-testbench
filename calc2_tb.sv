@@ -21,24 +21,9 @@ module calc2_tb;
   mailbox #(Transaction) check_mbx;     //mailbox for monitor to send transactions to checker
   mailbox #(bit) next_trans_mbx;  //mailbox for monitor to notify driver that it is ready for next transaction
   
-  //command inputs:
-  //Add: 4'h1   Sub: 4'h2
-  //SHL: 4'h5   SHR: 4'h6
-  
-  covergroup cg;
-  cp_c1 : coverpoint c1 {bins one = {1};bins two = {2};bins five = {5};bins six = {6};}
-  cp_c2 : coverpoint c2 {bins one = {1};bins two = {2};bins five = {5};bins six = {6};}
-  cp_c3 : coverpoint c3 {bins one = {1};bins two = {2};bins five = {5};bins six = {6};}
-  cp_c4 : coverpoint c4 {bins one = {1};bins two = {2};bins five = {5};bins six = {6};}
-  endgroup
-  
-  
-
-
 initial begin
   
   //put declarations before statments, or it errors
-  Transaction t;
   Generator gen;
   Driver driver;
   Monitor monitor;
@@ -54,22 +39,9 @@ initial begin
   check_mbx = new();      //delivers transactions to checker
   next_trans_mbx = new(); //notifies driver to run next transaction
   
-  //generate tests
+  //generate random tests
   gen = new(driver_mbx); //create generator
-  
-  //Generate random
-   cg_inst = new();  
-
-    for(i=0; i<num_tests; i++) begin
-        t = new();
-        if( !t.randomize()) begin
-          $display("could not randomize");
-          $finish;
-        end else begin
-          gen.add(t);
-		      cg_inst.sample();
-		    end
-     end
+  gen.generate_random(num_tests);
 
   //run tests
   driver = new(calc, driver_mbx, monitor_mbx, next_trans_mbx, num_tests);
@@ -78,8 +50,6 @@ initial begin
     driver.run();   //Process-1
     monitor.run();  //Process-2
   join
-  
-  
   
   //check results
   check = new(check_mbx);
