@@ -11,10 +11,6 @@ module calc2_tb;
 	
   bit c_clk = 0;        //initialize clock
   calc_if calc(c_clk);  //define calculator interface
-  bit [31:0] p11, p12, p13, p14, p21, p22, p23, p24;
-  bit [3:0] c1, c2, c3, c4;
-  bit[3:0] command[4]='{4'h1,4'h2,4'h5,4'h6};
-  bit [2:0] mode;
   
   mailbox #(Transaction) driver_mbx;      //mailbox for gen to send transactions to driver
   mailbox #(Transaction) monitor_mbx;     //mailbox for driver to send transactions to monitor
@@ -97,17 +93,6 @@ initial begin
 	forever
       #50ns c_clk=!c_clk;
 end
-
-//debug info
-/*
-  always @(negedge c_clk) begin
-      $display("reset: %b   time: %t", reset, $time);
-      $display("req1_cmd_in:  %h           out_resp1: %h", req1_cmd_in, out_resp1);
-		  $display("req1_data_in: %h    out_data1: %h", req1_data_in, out_data1);
-		  $display("req1_tag_in:  %h           out_tag1:  %h", req1_tag_in, out_tag1);
-		  $display();
-  end
-*/
 
 endmodule
 
