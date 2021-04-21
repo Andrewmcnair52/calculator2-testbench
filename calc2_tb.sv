@@ -57,6 +57,7 @@ initial begin
   //generate tests
   gen = new(driver_mbx); //create generator
   
+  for(int i=0; i<3; i++) begin
   t = new();
   if( !t.randomize()) begin
     $display("could not randomize");
@@ -64,6 +65,8 @@ initial begin
   end else begin
     t.print();
     $display();
+  end
+  
   end
   
     
