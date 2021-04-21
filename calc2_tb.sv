@@ -88,9 +88,6 @@ initial begin
 	//print output
 	$display();
 	check.print_summary();
-	//coverage
- 
-    $display("Coverage = %0.2f%%",cg_inst.get_coverage());
 	
 	$display(); //output seperator
 	$finish;
