@@ -4,11 +4,30 @@ class Monitor;
 
   bit debug = 0;
   
+  Transaction t;
+  
   virtual calc_if calc;   //virtual interface to amke our interface available in the class
   mailbox #(Transaction) monitor_mbx;     //get transactions from driver
   mailbox #(Transaction) check_mbx;       //send transactions to checker
   mailbox #(bit) next_trans_mbx;  //notify driver to run next command
   int num_transactions;
+  
+  covergroup cg_values with function sample (int array_index);
+    C1_PARAM1: coverpoint t.c1_param1[array_index];
+    C1_PARAM2: coverpoint t.c1_param2[array_index];
+    C1_CMD:    coverpoint t.c1_cmd[array_index];
+    C2_PARAM1: coverpoint t.c2_param1[array_index];
+    C2_PARAM2: coverpoint t.c2_param2[array_index];
+    C2_CMD:    coverpoint t.c1_cmd[array_index];
+    C3_PARAM1: coverpoint t.c3_param1[array_index];
+    C3_PARAM2: coverpoint t.c3_param2[array_index];
+    C3_CMD:    coverpoint t.c1_cmd[array_index];
+    C4_PARAM1: coverpoint t.c4_param1[array_index];
+    C4_PARAM2: coverpoint t.c4_param2[array_index];
+    C4_CMD:    coverpoint t.c1_cmd[array_index];
+  endgroup
+  
+  cg_values cg_values_inst;
   
   function new(virtual calc_if calc, mailbox #(Transaction) monitor_mbx, check_mbx, mailbox #(bit) next_trans_mbx, int num_transactions);
     this.calc = calc;                //connect virtual interface to our interface
@@ -16,11 +35,11 @@ class Monitor;
     this.check_mbx = check_mbx;
     this.next_trans_mbx = next_trans_mbx;
     this.num_transactions = num_transactions;
+    cg_values_inst = new();
   endfunction
 
   task automatic run;  //run a single transaction
   
-    Transaction t;
     int transaction_count = num_transactions;
     bit c1_received[4];
     bit c2_received[4];
@@ -44,6 +63,9 @@ class Monitor;
         t.print();
         $display();
       end
+      
+      //sample coverage info
+      foreach(t.c1_param1[i]) cg_values_inst.sample(i);
       
       //set recieved if no response expected
       for(int i=0; i<4; i++) begin
@@ -120,6 +142,9 @@ class Monitor;
       transaction_count = transaction_count - 1;  //decrement counter
     
     end //end of while loop: counting transactions
+    
+    //after transactions are done running, print functional coverage
+    $display("input value coverage: %0.2f %%"cg_values_inst.get_inst_coverage());
   
   endtask
   
