@@ -18,6 +18,7 @@ class Checker;
   function run();
   
     Transaction t;
+    bit error_occured = 0;
   
     while(check_mbx.num() > 0) begin
     
@@ -26,11 +27,15 @@ class Checker;
       
       for(int i=0; i<4; i++) begin  //for each test in transaction
       
+        //reset error_occured for pretty output
+        error_occured = 0;
+      
         //check channel 1
         if(t.c1_out_resp[i]!=t.c1_expected_resp[i] || t.c1_out_data[i]!=t.c1_expected_data[i]) begin
         $sformat(message, "error on channel 1: sent %0d %s %0d, received data %0d with resp %0d, expected data %0d with resp %0d", t.c1_param1[i], resolve_op(t.c1_cmd[i]), t.c1_param2[i], t.c1_out_data[i], t.c1_out_resp[i], t.c1_expected_data[i], t.c1_expected_resp[i]);
         message_queue.push_back(message);
         errorCnt = errorCnt + 1;
+        error_occured = 1;
         end else begin  //if data and response are good, success!
           successCnt = successCnt + 1;
         end
@@ -40,6 +45,7 @@ class Checker;
         $sformat(message, "error on channel 2: sent %0d %s %0d, received data %0d with resp %0d, expected data %0d with resp %0d", t.c2_param1[i], resolve_op(t.c2_cmd[i]), t.c2_param2[i], t.c2_out_data[i], t.c2_out_resp[i], t.c2_expected_data[i], t.c2_expected_resp[i]);
         message_queue.push_back(message);
         errorCnt = errorCnt + 1;
+        error_occured = 1;
         end else begin  //if data and response are good, success!
           successCnt = successCnt + 1;
         end
@@ -49,6 +55,7 @@ class Checker;
         $sformat(message, "error on channel 3: sent %0d %s %0d, received data %0d with resp %0d, expected data %0d with resp %0d", t.c3_param1[i], resolve_op(t.c3_cmd[i]), t.c3_param2[i], t.c3_out_data[i], t.c3_out_resp[i], t.c3_expected_data[i], t.c3_expected_resp[i]);
         message_queue.push_back(message);
         errorCnt = errorCnt + 1;
+        error_occured = 1;
         end else begin  //if data and response are good, success!
           successCnt = successCnt + 1;
         end
@@ -58,13 +65,14 @@ class Checker;
         $sformat(message, "error on channel 4: sent %0d %s %0d, received data %0d with resp %0d, expected data %0d with resp %0d", t.c4_param1[i], resolve_op(t.c4_cmd[i]), t.c4_param2[i], t.c4_out_data[i], t.c4_out_resp[i], t.c4_expected_data[i], t.c4_expected_resp[i]);
         message_queue.push_back(message);
         errorCnt = errorCnt + 1;
+        error_occured = 1;
         end else begin  //if data and response are good, success!
           successCnt = successCnt + 1;
         end
       
       end //end for loop: iterating through tests in transaction
     
-      message_queue.push_back(" "); //line seperator between transactions
+      if(error_occured) message_queue.push_back(" "); //line seperator between transactions
     
     end //end while loop" iterating through mbx
     
