@@ -19,7 +19,7 @@ class Generator;  //class to generate transactions
   
   //random transaction generation
   function generate_random(int num_tests);
-     for(i=0; i<num_tests; i++) begin
+     for(int i=0; i<num_tests; i++) begin
         t = new();
         if( !t.randomize() ) begin
           $display("could not randomize");
