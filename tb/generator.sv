@@ -24,10 +24,8 @@ class Generator;  //class to generate transactions
         if( !t.randomize() ) begin
           $display("could not randomize");
           $finish;
-        end else begin
-          gen.add(t);
-		      cg_inst.sample();
-		    end
+        end else
+          driver_mbx.put(t);
      end
   endfunction;
 
