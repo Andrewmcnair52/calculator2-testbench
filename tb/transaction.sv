@@ -2,24 +2,33 @@
 class Transaction;  //class to store info for a single test
 
   //channel 1, 4 tests
-  bit[31:0] c1_param1[4], c1_param2[4], c1_out_data[4], c1_expected_data[4];
-  bit[3:0] c1_cmd[4];
+  rand bit[31:0] c1_param1[4], c1_param2[4];
+  bit[31:0] c1_out_data[4], c1_expected_data[4];
+  rand bit[3:0] c1_cmd[4];
   bit[1:0] c1_out_resp[4], c1_expected_resp[4];
   
   //channel 2, 4 tests
-  bit[31:0] c2_param1[4], c2_param2[4], c2_out_data[4], c2_expected_data[4];
-  bit[3:0] c2_cmd[4];
+  rand bit[31:0] c2_param1[4], c2_param2[4];
+  bit[31:0] c2_out_data[4], c2_expected_data[4];
+  rand bit[3:0] c2_cmd[4];
   bit[1:0] c2_out_resp[4], c2_expected_resp[4];
   
   //channel 3, 4 tests
-  bit[31:0] c3_param1[4], c3_param2[4], c3_out_data[4], c3_expected_data[4];
-  bit[3:0] c3_cmd[4];
+  rand bit[31:0] c3_param1[4], c3_param2[4];
+  bit[31:0] c3_out_data[4], c3_expected_data[4];
+  rand bit[3:0] c3_cmd[4];
   bit[1:0] c3_out_resp[4], c3_expected_resp[4];
   
   //channel 4, 4 tests
-  bit[31:0] c4_param1[4], c4_param2[4], c4_out_data[4], c4_expected_data[4];
-  bit[3:0] c4_cmd[4];
+  rand bit[31:0] c4_param1[4], c4_param2[4];
+  bit[31:0] c4_out_data[4], c4_expected_data[4];
+  rand bit[3:0] c4_cmd[4];
   bit[1:0] c4_out_resp[4], c4_expected_resp[4];
+  
+  constraint c1 {c1_cmd>0; c1_cmd<7; c1_cmd!=3; c1_cmd!=4;}
+  constraint c2 {c2_cmd>0; c2_cmd<7; c2_cmd!=3; c2_cmd!=4;}
+  constraint c3 {c3_cmd>0; c3_cmd<7; c3_cmd!=3; c3_cmd!=4;}
+  constraint c4 {c4_cmd>0; c4_cmd<7; c4_cmd!=3; c4_cmd!=4;}
   
   function print(); //display test data for debugging purposes
     $display("Ch1 param1: %h, %h, %h, %h", c1_param1[0],c1_param1[1],c1_param1[2],c1_param1[3]);

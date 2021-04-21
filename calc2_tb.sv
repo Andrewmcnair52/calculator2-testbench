@@ -7,6 +7,7 @@
 
 module calc2_tb;
 	
+	int num_tests = 10;
 	
   bit c_clk = 0;        //initialize clock
   calc_if calc(c_clk);  //define calculator interface
@@ -57,37 +58,34 @@ initial begin
   gen = new(driver_mbx); //create generator
   
   t = new();
-  t.add_c1(.p11(32'h158),.p12(32'h158),.p13(32'h158),.p14(32'h158),.p21(32'h12),.p22(32'h12),.p23(32'h4),.p24(32'h4),.c1(4'h1),.c2(4'h2),.c3(4'h5),.c4(4'h6));
-  t.add_c2(.p11(32'h158),.p12(32'h158),.p13(32'h158),.p14(32'h158),.p21(32'h12),.p22(32'h12),.p23(32'h4),.p24(32'h4),.c1(4'h1),.c2(4'h2),.c3(4'h5),.c4(4'h6));
-  t.add_c3(.p11(32'h158),.p12(32'h158),.p13(32'h158),.p14(32'h158),.p21(32'h12),.p22(32'h12),.p23(32'h4),.p24(32'h4),.c1(4'h1),.c2(4'h2),.c3(4'h5),.c4(4'h6));
-  t.add_c4(.p11(32'h158),.p12(32'h158),.p13(32'h158),.p14(32'h158),.p21(32'h12),.p22(32'h12),.p23(32'h4),.p24(32'h4),.c1(4'h1),.c2(4'h2),.c3(4'h5),.c4(4'h6));
-  gen.add(t);  //add to mailbox
+  if( !t.randomize()) begin
+    $display("could not randomize");
+    $finish
+  end else begin
+    t.print();
+    $display();
+  end
   
-  t = new();
-  t.add_c1(.p11(32'h158),.p12(32'h158),.p13(32'h158),.p14(32'h158),.p21(32'h12),.p22(32'h4),.p23(32'h12),.p24(32'h4),.c1(4'h1),.c2(4'h5),.c3(4'h2),.c4(4'h6));
-  t.add_c2(.p11(32'h158),.p12(32'h158),.p13(32'h158),.p14(32'h158),.p21(32'h12),.p22(32'h4),.p23(32'h12),.p24(32'h4),.c1(4'h1),.c2(4'h5),.c3(4'h2),.c4(4'h6));
-  t.add_c3(.p11(32'h158),.p12(32'h158),.p13(32'h158),.p14(32'h158),.p21(32'h12),.p22(32'h4),.p23(32'h12),.p24(32'h4),.c1(4'h1),.c2(4'h5),.c3(4'h2),.c4(4'h6));
-  t.add_c4(.p11(32'h158),.p12(32'h158),.p13(32'h158),.p14(32'h158),.p21(32'h12),.p22(32'h4),.p23(32'h12),.p24(32'h4),.c1(4'h1),.c2(4'h5),.c3(4'h2),.c4(4'h6));
-  gen.add(t);  //add to mailbox
-   
+    
+  
   //Generate random
    cg_inst = new();  
 
-    for(i=0;i<3;i++)begin
-     p11=$urandom%500; p12=$urandom%500; p13=$urandom%500; p14=$urandom%500; p21=$urandom%500; p22=$urandom%500; p23=$urandom%500; p24=$urandom%500;
-	 c1=command[$urandom%4]; c2=command[$urandom%4]; c3=command[$urandom%4]; c4 =command[$urandom%4];
+    for(i=0; i<num_tests; i++) begin
+        p11=$urandom%500; p12=$urandom%500; p13=$urandom%500; p14=$urandom%500; p21=$urandom%500; p22=$urandom%500; p23=$urandom%500; p24=$urandom%500;
+	      c1=command[$urandom%4]; c2=command[$urandom%4]; c3=command[$urandom%4]; c4 =command[$urandom%4];
         t = new();
         t.add_c1(p11,p12,p13,p14,p21,p22,p23,p24,c1,c2,c3,c4);
         t.add_c2(p11,p12,p13,p14,p21,p22,p23,p24,c1,c2,c3,c4);
         t.add_c3(p11,p12,p13,p14,p21,p22,p23,p24,c1,c2,c3,c4);
         t.add_c4(p11,p12,p13,p14,p21,p22,p23,p24,c1,c2,c3,c4);
         gen.add(t);
-		cg_inst.sample();
+		    cg_inst.sample();
      end
 
   //run tests
-  driver = new(calc, driver_mbx, monitor_mbx, next_trans_mbx,5);    //in the future, number of transactions must be set be generator
-  monitor = new(calc, monitor_mbx, check_mbx, next_trans_mbx,5);
+  driver = new(calc, driver_mbx, monitor_mbx, next_trans_mbx, num_tests);
+  monitor = new(calc, monitor_mbx, check_mbx, next_trans_mbx, num_tests);
   fork
     driver.run();   //Process-1
     monitor.run();  //Process-2
