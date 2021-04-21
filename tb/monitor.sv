@@ -87,7 +87,7 @@ class Monitor;
           @(posedge calc.c_clk);
           if(debug==1) $display("clock_cycle: %0d", i);
           if(calc.out_resp1!=0 && c1_received[calc.out_tag1]==0) begin   //if response on channel 1 and we havnt already seen that tag
-            $display("  response on channel 1, tag %0d", calc.out_tag1);
+            if(debug==1) $display("  response on channel 1, tag %0d", calc.out_tag1);
             t.c1_out_resp[calc.out_tag1] = calc.out_resp1;
             t.c1_out_data[calc.out_tag1] = calc.out_data1;
             c1_received[calc.out_tag1] = 1;
