@@ -7,7 +7,7 @@
 
 module calc2_tb;
 	
-	int num_tests = 10;
+	int num_tests = 20;
 	
   bit c_clk = 0;        //initialize clock
   calc_if calc(c_clk);  //define calculator interface
