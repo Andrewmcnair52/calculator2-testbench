@@ -32,302 +32,88 @@
 # Loading work.priority
 # Refreshing /nfs/home/q/qi_ia/COEN413/project2/calculator2-testbench/work.shifter
 # Loading work.shifter
-# ** Warning: (vsim-3017) calc2_tb.sv(141): [TFMPC] - Too few port connections. Expected 30, found 26.
+# ** Warning: (vsim-3017) calc2_tb.sv(88): [TFMPC] - Too few port connections. Expected 30, found 26.
 #         Region: /calc2_tb/calc2_top
-# ** Warning: (vsim-3722) calc2_tb.sv(141): [TFMPC] - Missing connection for port 'scan_out'.
-# ** Warning: (vsim-3722) calc2_tb.sv(141): [TFMPC] - Missing connection for port 'a_clk'.
-# ** Warning: (vsim-3722) calc2_tb.sv(141): [TFMPC] - Missing connection for port 'b_clk'.
-# ** Warning: (vsim-3722) calc2_tb.sv(141): [TFMPC] - Missing connection for port 'scan_in'.
+# ** Warning: (vsim-3722) calc2_tb.sv(88): [TFMPC] - Missing connection for port 'scan_out'.
+# ** Warning: (vsim-3722) calc2_tb.sv(88): [TFMPC] - Missing connection for port 'a_clk'.
+# ** Warning: (vsim-3722) calc2_tb.sv(88): [TFMPC] - Missing connection for port 'b_clk'.
+# ** Warning: (vsim-3722) calc2_tb.sv(88): [TFMPC] - Missing connection for port 'scan_in'.
 # ** Warning: (vsim-3017) calc2_top.v(275): [TFMPC] - Too few port connections. Expected 41, found 40.
 #         Region: /calc2_tb/calc2_top/priority1
-# ** Warning: (vsim-LRM-8806) tb/checker.sv(24): Task "get" is being called in function "run".
+# ** Warning: (vsim-LRM-8806) tb/checker.sv(25): Task "get" is being called in function "run".
 #         Region: /calc2_tb
 # ** Warning: (vsim-LRM-8806) tb/generator.sv(17): Task "put" is being called in function "add".
 #         Region: /calc2_tb
+# ** Warning: (vsim-LRM-8806) tb/generator.sv(28): Task "put" is being called in function "generate_random".
+#         Region: /calc2_tb
 # run -all 
 #  
-# 
-# monitoring transaction: 
-# Ch1 param1: 00000158, 00000158, 00000158, 00000158
-# Ch1 param2: 00000012, 00000012, 00000004, 00000004
-# Ch1 cmd: 1, 2, 5, 6
-# Ch2 param1: 00000158, 00000158, 00000158, 00000158
-# Ch2 param2: 00000012, 00000012, 00000004, 00000004
-# Ch2 cmd: 1, 2, 5, 6
-# Ch3 param1: 00000158, 00000158, 00000158, 00000158
-# Ch3 param2: 00000012, 00000012, 00000004, 00000004
-# Ch3 cmd: 1, 2, 5, 6
-# Ch4 param1: 00000158, 00000158, 00000158, 00000158
-# Ch4 param2: 00000012, 00000012, 00000004, 00000004
-# Ch4 cmd: 1, 2, 5, 6
+# ===============================================
+# Functional Coverage
+# ===============================================
 #  
-#  
-# clock_cycle: 0
-# clock_cycle: 1
-# clock_cycle: 2
-# clock_cycle: 3
-# clock_cycle: 4
-#   response on channel 1, tag 0
-# clock_cycle: 5
-#   response on channel 2, tag 0
-# clock_cycle: 6
-#   response on channel 3, tag 0
-# clock_cycle: 7
-#   response on channel 4, tag 0
-# clock_cycle: 8
-#   response on channel 1, tag 1
-# clock_cycle: 9
-#   response on channel 2, tag 1
-# clock_cycle: 10
-#   response on channel 3, tag 1
-# clock_cycle: 11
-#   response on channel 4, tag 1
-# clock_cycle: 12
-#   response on channel 1, tag 3
-# clock_cycle: 13
-#   response on channel 2, tag 3
-# clock_cycle: 14
-#   response on channel 3, tag 3
-# clock_cycle: 15
-#   response on channel 4, tag 3
-# clock_cycle: 16
-# clock_cycle: 17
-# clock_cycle: 18
-# clock_cycle: 19
-# timeout triggered
-# 
-# monitoring transaction: 
-# Ch1 param1: 00000158, 00000158, 00000158, 00000158
-# Ch1 param2: 00000012, 00000004, 00000012, 00000004
-# Ch1 cmd: 1, 5, 2, 6
-# Ch2 param1: 00000158, 00000158, 00000158, 00000158
-# Ch2 param2: 00000012, 00000004, 00000012, 00000004
-# Ch2 cmd: 1, 5, 2, 6
-# Ch3 param1: 00000158, 00000158, 00000158, 00000158
-# Ch3 param2: 00000012, 00000004, 00000012, 00000004
-# Ch3 cmd: 1, 5, 2, 6
-# Ch4 param1: 00000158, 00000158, 00000158, 00000158
-# Ch4 param2: 00000012, 00000004, 00000012, 00000004
-# Ch4 cmd: 1, 5, 2, 6
-#  
-#  
-# clock_cycle: 0
-# clock_cycle: 1
-# clock_cycle: 2
-# clock_cycle: 3
-# clock_cycle: 4
-#   response on channel 1, tag 0
-# clock_cycle: 5
-#   response on channel 2, tag 0
-# clock_cycle: 6
-#   response on channel 1, tag 1
-#   response on channel 3, tag 0
-# clock_cycle: 7
-#   response on channel 2, tag 1
-#   response on channel 4, tag 0
-# clock_cycle: 8
-#   response on channel 1, tag 2
-#   response on channel 3, tag 1
-# clock_cycle: 9
-#   response on channel 2, tag 2
-#   response on channel 4, tag 1
-# clock_cycle: 10
-#   response on channel 1, tag 3
-#   response on channel 3, tag 2
-# clock_cycle: 11
-#   response on channel 2, tag 3
-#   response on channel 4, tag 2
-# clock_cycle: 12
-#   response on channel 3, tag 3
-# clock_cycle: 13
-#   response on channel 4, tag 3
-# every test has responded, moving on ...
-# 
-# monitoring transaction: 
-# Ch1 param1: 0000016d, 0000001f, 00000089, 00000057
-# Ch1 param2: 00000004, 0000008a, 000001e0, 00000163
-# Ch1 cmd: 6, 1, 2, 2
-# Ch2 param1: 0000016d, 0000001f, 00000089, 00000057
-# Ch2 param2: 00000004, 0000008a, 000001e0, 00000163
-# Ch2 cmd: 6, 1, 2, 2
-# Ch3 param1: 0000016d, 0000001f, 00000089, 00000057
-# Ch3 param2: 00000004, 0000008a, 000001e0, 00000163
-# Ch3 cmd: 6, 1, 2, 2
-# Ch4 param1: 0000016d, 0000001f, 00000089, 00000057
-# Ch4 param2: 00000004, 0000008a, 000001e0, 00000163
-# Ch4 cmd: 6, 1, 2, 2
-#  
-#  
-# clock_cycle: 0
-# clock_cycle: 1
-# clock_cycle: 2
-# clock_cycle: 3
-# clock_cycle: 4
-#   response on channel 1, tag 0
-# clock_cycle: 5
-#   response on channel 2, tag 0
-# clock_cycle: 6
-#   response on channel 1, tag 1
-#   response on channel 3, tag 0
-# clock_cycle: 7
-#   response on channel 2, tag 1
-#   response on channel 4, tag 0
-# clock_cycle: 8
-#   response on channel 3, tag 1
-# clock_cycle: 9
-#   response on channel 4, tag 1
-# clock_cycle: 10
-#   response on channel 1, tag 2
-# clock_cycle: 11
-#   response on channel 2, tag 2
-# clock_cycle: 12
-#   response on channel 3, tag 2
-# clock_cycle: 13
-#   response on channel 4, tag 2
-# clock_cycle: 14
-#   response on channel 1, tag 3
-# clock_cycle: 15
-#   response on channel 2, tag 3
-# clock_cycle: 16
-#   response on channel 3, tag 3
-# clock_cycle: 17
-#   response on channel 4, tag 3
-# every test has responded, moving on ...
-# 
-# monitoring transaction: 
-# Ch1 param1: 000001e1, 0000015c, 000001a2, 000001b2
-# Ch1 param2: 000000bf, 000000b0, 00000061, 000001b0
-# Ch1 cmd: 2, 2, 6, 6
-# Ch2 param1: 000001e1, 0000015c, 000001a2, 000001b2
-# Ch2 param2: 000000bf, 000000b0, 00000061, 000001b0
-# Ch2 cmd: 2, 2, 6, 6
-# Ch3 param1: 000001e1, 0000015c, 000001a2, 000001b2
-# Ch3 param2: 000000bf, 000000b0, 00000061, 000001b0
-# Ch3 cmd: 2, 2, 6, 6
-# Ch4 param1: 000001e1, 0000015c, 000001a2, 000001b2
-# Ch4 param2: 000000bf, 000000b0, 00000061, 000001b0
-# Ch4 cmd: 2, 2, 6, 6
-#  
-#  
-# clock_cycle: 0
-# clock_cycle: 1
-# clock_cycle: 2
-# clock_cycle: 3
-# clock_cycle: 4
-#   response on channel 1, tag 0
-# clock_cycle: 5
-#   response on channel 2, tag 0
-# clock_cycle: 6
-#   response on channel 3, tag 0
-# clock_cycle: 7
-#   response on channel 4, tag 0
-# clock_cycle: 8
-#   response on channel 1, tag 1
-# clock_cycle: 9
-#   response on channel 2, tag 1
-# clock_cycle: 10
-#   response on channel 3, tag 1
-# clock_cycle: 11
-#   response on channel 4, tag 1
-# clock_cycle: 12
-#   response on channel 1, tag 3
-# clock_cycle: 13
-#   response on channel 2, tag 3
-# clock_cycle: 14
-#   response on channel 3, tag 3
-# clock_cycle: 15
-#   response on channel 4, tag 3
-# clock_cycle: 16
-# clock_cycle: 17
-# clock_cycle: 18
-# clock_cycle: 19
-# timeout triggered
-# 
-# monitoring transaction: 
-# Ch1 param1: 00000144, 0000018b, 00000169, 00000098
-# Ch1 param2: 00000092, 00000123, 000001c0, 000000b2
-# Ch1 cmd: 6, 6, 2, 1
-# Ch2 param1: 00000144, 0000018b, 00000169, 00000098
-# Ch2 param2: 00000092, 00000123, 000001c0, 000000b2
-# Ch2 cmd: 6, 6, 2, 1
-# Ch3 param1: 00000144, 0000018b, 00000169, 00000098
-# Ch3 param2: 00000092, 00000123, 000001c0, 000000b2
-# Ch3 cmd: 6, 6, 2, 1
-# Ch4 param1: 00000144, 0000018b, 00000169, 00000098
-# Ch4 param2: 00000092, 00000123, 000001c0, 000000b2
-# Ch4 cmd: 6, 6, 2, 1
-#  
-#  
-# clock_cycle: 0
-# clock_cycle: 1
-# clock_cycle: 2
-# clock_cycle: 3
-# clock_cycle: 4
-#   response on channel 1, tag 0
-# clock_cycle: 5
-#   response on channel 2, tag 0
-# clock_cycle: 6
-#   response on channel 3, tag 0
-# clock_cycle: 7
-#   response on channel 4, tag 0
-# clock_cycle: 8
-#   response on channel 1, tag 2
-# clock_cycle: 9
-#   response on channel 2, tag 2
-# clock_cycle: 10
-#   response on channel 3, tag 2
-# clock_cycle: 11
-#   response on channel 4, tag 2
-# clock_cycle: 12
-#   response on channel 1, tag 3
-# clock_cycle: 13
-#   response on channel 2, tag 3
-# clock_cycle: 14
-#   response on channel 3, tag 3
-# clock_cycle: 15
-#   response on channel 4, tag 3
-# clock_cycle: 16
-# clock_cycle: 17
-# clock_cycle: 18
-# clock_cycle: 19
-# timeout triggered
+# input value coverage: 52.86 %
+# channel 1 parameter 1 coverage: 68.75 %
+# channel 1 parameter 2 coverage: 65.62 %
+# channel 1 command coverage: 25.00 %
+# channel 2 parameter 1 coverage: 68.75 %
+# channel 2 parameter 2 coverage: 65.62 %
+# channel 2 command coverage: 25.00 %
+# channel 3 parameter 1 coverage: 70.31 %
+# channel 3 parameter 2 coverage: 60.94 %
+# channel 3 command coverage: 25.00 %
+# channel 4 parameter 1 coverage: 68.75 %
+# channel 4 parameter 2 coverage: 65.62 %
+# channel 4 command coverage: 25.00 %
 #  
 # ===============================================
 # SUMMARY
 # ===============================================
 # 
-# errors: 24   successes: 56
+# errors: 34   successes: 286
 # 
-# error on channel 1: sent 344 - 18, received data 5574 with resp 1, expected data 326 with resp 1
-# error on channel 2: sent 344 - 18, received data 5574 with resp 1, expected data 326 with resp 1
-# error on channel 3: sent 344 - 18, received data 5574 with resp 1, expected data 326 with resp 1
-# error on channel 4: sent 344 - 18, received data 5574 with resp 1, expected data 326 with resp 1
-# error on channel 1: sent 344 << 4, received data 0 with resp 0, expected data 5504 with resp 1
-# error on channel 2: sent 344 << 4, received data 0 with resp 0, expected data 5504 with resp 1
-# error on channel 3: sent 344 << 4, received data 0 with resp 0, expected data 5504 with resp 1
-# error on channel 4: sent 344 << 4, received data 0 with resp 0, expected data 5504 with resp 1
+# error on channel 4: sent 2418060186 << 29, received data 0 with resp 0, expected data 1073741824 with resp 1
+#  
+# error on channel 1: sent 1041683690 << 14, received data 3040477184 with resp 1, expected data 3040509952 with resp 1
+#  
+# error on channel 3: sent 4088042605 + 2662521457, received data 3747442398 with resp 3, expected data 2455596766 with resp 2
+# error on channel 3: sent 1535085538 << 19, received data 0 with resp 0, expected data 1594884096 with resp 1
+#  
+# error on channel 2: sent 2378015063 << 7, received data 3738184576 with resp 1, expected data 3738217344 with resp 1
+# error on channel 4: sent 548314286 - 1852704762, received data 4207336628 with resp 3, expected data 2990576820 with resp 2
+# error on channel 4: sent 2772657736 << 1, received data 0 with resp 0, expected data 1250348176 with resp 1
+# error on channel 3: sent 1157828705 - 2346809192, received data 3105986809 with resp 3, expected data 3105986809 with resp 2
+# error on channel 3: sent 2291210539 >> 31, received data 0 with resp 0, expected data 1 with resp 1
+# error on channel 1: sent 1919881902 - 3165058270, received data 3084910034 with resp 3, expected data 3049790928 with resp 2
+# error on channel 2: sent 1413578275 - 1803227910, received data 4024855325 with resp 3, expected data 3905317661 with resp 2
+# error on channel 1: sent 1056941589 >> 3, received data 0 with resp 0, expected data 132117698 with resp 1
+# error on channel 2: sent 3765860661 << 13, received data 0 with resp 0, expected data 3475415040 with resp 1
+# error on channel 3: sent 1371213313 - 1506230480, received data 4159950197 with resp 3, expected data 4159950129 with resp 2
+# error on channel 2: sent 3725160295 - 3417163723, received data 308002716 with resp 1, expected data 307996572 with resp 1
+# error on channel 3: sent 1946671451 >> 24, received data 0 with resp 0, expected data 116 with resp 1
+# error on channel 2: sent 1920032614 >> 18, received data 0 with resp 0, expected data 7324 with resp 1
+# error on channel 2: sent 3621738848 << 1, received data 2948477632 with resp 1, expected data 2948510400 with resp 1
+# error on channel 3: sent 4173882180 + 1552786096, received data 2102789620 with resp 3, expected data 1431700980 with resp 2
+# error on channel 3: sent 3697094042 << 26, received data 0 with resp 0, expected data 1744830464 with resp 1
+#  
+# error on channel 4: sent 1725634872 + 1836238251, received data 3757047783 with resp 1, expected data 3561873123 with resp 1
+# error on channel 4: sent 3196017272 >> 4, received data 0 with resp 0, expected data 199751079 with resp 1
+#  
+# error on channel 2: sent 1781760044 << 13, received data 1879375872 with resp 1, expected data 1879408640 with resp 1
+# error on channel 3: sent 3471085101 + 1911769639, received data 3705657428 with resp 3, expected data 1087887444 with resp 2
+# error on channel 1: sent 4005965008 + 1278834568, received data 1056960377 with resp 3, expected data 989832280 with resp 2
+# error on channel 3: sent 3788468268 << 14, received data 0 with resp 0, expected data 3691708416 with resp 1
+# error on channel 1: sent 839276878 >> 3, received data 0 with resp 0, expected data 104909609 with resp 1
+#  
+# error on channel 1: sent 133264424 << 5, received data 4264428800 with resp 1, expected data 4264461568 with resp 1
+#  
+# error on channel 1: sent 2853378760 - 1641993980, received data 1211384797 with resp 1, expected data 1211384780 with resp 1
+# error on channel 3: sent 2922042830 - 4022581370, received data 3203874268 with resp 3, expected data 3194428756 with resp 2
+# error on channel 4: sent 1614021357 + 3429861338, received data 3216763591 with resp 3, expected data 748915399 with resp 2
+# error on channel 1: sent 3061730350 >> 22, received data 0 with resp 0, expected data 729 with resp 1
+# error on channel 3: sent 2935173580 << 0, received data 0 with resp 0, expected data 2935173580 with resp 1
+# error on channel 4: sent 149216727 << 13, received data 0 with resp 0, expected data 2612715520 with resp 1
 #  
 #  
-#  
-# error on channel 1: sent 348 - 176, received data 253 with resp 1, expected data 172 with resp 1
-# error on channel 2: sent 348 - 176, received data 253 with resp 1, expected data 172 with resp 1
-# error on channel 3: sent 348 - 176, received data 253 with resp 1, expected data 172 with resp 1
-# error on channel 4: sent 348 - 176, received data 253 with resp 1, expected data 172 with resp 1
-# error on channel 1: sent 418 >> 97, received data 0 with resp 0, expected data 0 with resp 1
-# error on channel 2: sent 418 >> 97, received data 0 with resp 0, expected data 0 with resp 1
-# error on channel 3: sent 418 >> 97, received data 0 with resp 0, expected data 0 with resp 1
-# error on channel 4: sent 418 >> 97, received data 0 with resp 0, expected data 0 with resp 1
-#  
-# error on channel 1: sent 395 >> 291, received data 0 with resp 0, expected data 0 with resp 1
-# error on channel 2: sent 395 >> 291, received data 0 with resp 0, expected data 0 with resp 1
-# error on channel 3: sent 395 >> 291, received data 0 with resp 0, expected data 0 with resp 1
-# error on channel 4: sent 395 >> 291, received data 0 with resp 0, expected data 0 with resp 1
-# error on channel 1: sent 361 - 448, received data 4294967225 with resp 3, expected data 4294967209 with resp 2
-# error on channel 2: sent 361 - 448, received data 4294967225 with resp 3, expected data 4294967209 with resp 2
-# error on channel 3: sent 361 - 448, received data 4294967225 with resp 3, expected data 4294967209 with resp 2
-# error on channel 4: sent 361 - 448, received data 4294967225 with resp 3, expected data 4294967209 with resp 2
-#  
-# Coverage = 62.50%
-#  
-# ** Note: $finish    : calc2_tb.sv(110)
-#    Time: 9550 ns  Iteration: 2  Instance: /calc2_tb
+# ** Note: $finish    : calc2_tb.sv(57)
+#    Time: 35950 ns  Iteration: 2  Instance: /calc2_tb

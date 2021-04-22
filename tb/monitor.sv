@@ -26,7 +26,49 @@ class Monitor;
     C4_PARAM2: coverpoint t.c4_param2[array_index];
     C4_CMD:    coverpoint t.c1_cmd[array_index];
   endgroup
-  
+
+  covergroup cg_1_p1 with function sample (int array_index);
+    C1_PARAM1: coverpoint t.c1_param1[array_index];
+  endgroup;
+  covergroup cg_1_p2 with function sample (int array_index);
+    C1_PARAM2: coverpoint t.c1_param2[array_index];
+  endgroup;
+  covergroup cg_1_c with function sample (int array_index);
+    C1_CMD: coverpoint t.c1_cmd[array_index];
+  endgroup;
+
+   covergroup cg_2_p1 with function sample (int array_index);
+    C2_PARAM1: coverpoint t.c2_param1[array_index];
+   endgroup;	
+   covergroup cg_2_p2 with function sample (int array_index);
+    C2_PARAM2: coverpoint t.c1_param2[array_index];
+    endgroup;
+   covergroup cg_2_c with function sample (int array_index);
+    C2_CMD: coverpoint t.c2_cmd[array_index];
+   endgroup;
+
+   covergroup cg_3_p1 with function sample (int array_index);
+    C3_PARAM1: coverpoint t.c3_param1[array_index];
+   endgroup;	
+   covergroup cg_3_p2 with function sample (int array_index);
+    C3_PARAM2: coverpoint t.c3_param2[array_index];
+   endgroup;
+   covergroup cg_3_c with function sample (int array_index);
+    C3_CMD: coverpoint t.c3_cmd[array_index];
+   endgroup;
+
+   covergroup cg_4_p1 with function sample (int array_index);
+    C4_PARAM1: coverpoint t.c4_param1[array_index];
+   endgroup;	
+   covergroup cg_4_p2 with function sample (int array_index);
+    C4_PARAM2: coverpoint t.c4_param2[array_index];
+   endgroup;
+   covergroup cg_4_c with function sample (int array_index);
+    C4_CMD: coverpoint t.c4_cmd[array_index];
+   endgroup;
+
+
+
   function new(virtual calc_if calc, mailbox #(Transaction) monitor_mbx, check_mbx, mailbox #(bit) next_trans_mbx, int num_transactions);
     this.calc = calc;                //connect virtual interface to our interface
     this.monitor_mbx = monitor_mbx;
@@ -34,6 +76,18 @@ class Monitor;
     this.next_trans_mbx = next_trans_mbx;
     this.num_transactions = num_transactions;
     cg_values = new();
+    cg_1_p1 = new();
+    cg_1_p2 = new();
+    cg_1_c = new();
+    cg_2_p1 = new();
+    cg_2_p2 = new();
+    cg_2_c = new();
+    cg_3_p1 = new();
+    cg_3_p2 = new();
+    cg_3_c = new();
+    cg_4_p1 = new();
+    cg_4_p2 = new();
+    cg_4_c = new();
   endfunction
 
   task automatic run;  //run a single transaction
@@ -63,8 +117,22 @@ class Monitor;
       end
       
       //sample coverage info
-      foreach(t.c1_param1[i]) cg_values.sample(i);
-      
+      foreach(t.c1_param1[i]) begin
+        cg_1_p1.sample(i);
+	cg_1_p2.sample(i);
+	cg_1_c.sample(i);
+	cg_2_p1.sample(i);
+	cg_2_p2.sample(i);
+	cg_2_c.sample(i);
+	cg_3_p1.sample(i);
+	cg_3_p2.sample(i);
+	cg_3_c.sample(i);
+	cg_4_p1.sample(i);
+	cg_4_p2.sample(i);
+	cg_4_c.sample(i);
+        cg_values.sample(i);
+      end
+
       //set recieved if no response expected
       for(int i=0; i<4; i++) begin
         if(t.c1_cmd[i] == 0) c1_received[i] = 1;
@@ -145,7 +213,18 @@ class Monitor;
     $display("===============================================\nFunctional Coverage\n===============================================");
     $display();
     $display("input value coverage: %0.2f %%", cg_values.get_inst_coverage());
-  
+	$display("channel 1 parameter 1 coverage: %0.2f %%", cg_1_p1.get_inst_coverage());
+	$display("channel 1 parameter 2 coverage: %0.2f %%", cg_1_p2.get_inst_coverage());
+	$display("channel 1 command coverage: %0.2f %%", cg_1_c.get_inst_coverage());
+	$display("channel 2 parameter 1 coverage: %0.2f %%", cg_2_p1.get_inst_coverage());
+	$display("channel 2 parameter 2 coverage: %0.2f %%", cg_2_p2.get_inst_coverage());
+	$display("channel 2 command coverage: %0.2f %%", cg_2_c.get_inst_coverage());
+	$display("channel 3 parameter 1 coverage: %0.2f %%", cg_3_p1.get_inst_coverage());
+	$display("channel 3 parameter 2 coverage: %0.2f %%", cg_3_p2.get_inst_coverage());
+	$display("channel 3 command coverage: %0.2f %%", cg_3_c.get_inst_coverage());
+	$display("channel 4 parameter 1 coverage: %0.2f %%", cg_4_p1.get_inst_coverage());
+	$display("channel 4 parameter 2 coverage: %0.2f %%", cg_4_p2.get_inst_coverage());
+	$display("channel 4 command coverage: %0.2f %%", cg_4_c.get_inst_coverage());
   endtask
   
 endclass
